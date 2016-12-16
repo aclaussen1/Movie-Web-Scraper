@@ -22,6 +22,7 @@ public class TomatoScraper {
 	
 	public boolean tomatoSearch() {
 		try{
+
 			if(movieWriters.contains("http")) {
 				userAgent.visit(movieWriters);
 				return true;
@@ -35,9 +36,10 @@ public class TomatoScraper {
 			  //userAgent.visit(userAgent.doc.findFirst("<div id=results_movies_tab>").findFirst("<a>").getAt("href"));
 			  //userAgent.visit(userAgent.doc.findFirst("<table class=\"results\">").findFirst("<tr class=\"even detailed\">").findFirst("<a>").getAt("href"));
 			  //System.out.println(userAgent.getLocation());
-			  Element resultsDiv = userAgent.doc.findFirst("<section id=SummaryResults");
+			  Element resultsDiv = userAgent.doc.findFirst("<section id=SummaryResults>");
 			  //System.out.println("here");
 			  for(Element element : resultsDiv.findEvery("<a>")) {
+					System.out.println("here");
 				  //System.out.println(element.getText() + " - " + nameOfMovie);
 				  //System.out.println("ROTTEN TOMATOES Movie: " + element.getText().replace("The ", "") + " - OUR Movie: " + nameOfMovie.replace(", The", "").replace(", A",  ""));
 				  if(element.getText().replace("The ", "").contains(nameOfMovie.replace(", The", "").replace(", A", ""))) {
@@ -63,6 +65,7 @@ public class TomatoScraper {
 					  continue;
 				  }
 			  }
+			  System.out.println(userAgent.getLocation());
 			  return false;
 			}
 			catch(JauntException e){ 

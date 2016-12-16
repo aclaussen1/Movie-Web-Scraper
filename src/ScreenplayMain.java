@@ -53,7 +53,9 @@ public class ScreenplayMain {
 		BufferedWriter writer = null;
 		  try {
 		    //create a temporary file
-		    File logFile = new File("C:/Users/dpourmehr/documents/brianna_reports/primaryThreeReport.txt");
+			  
+			String fileName = JOptionPane.showInputDialog(null, "What would you like to name your file?\nExample: primaryReport.txt\n\nFILE HAS TO BE A .TXT EXTENSION");
+		    File logFile = new File("C:/Users/jchoi43/Documents/brianna_reports/" + fileName);
 		    
 		
 		    // This will output the full path where the file will be written to...
