@@ -55,7 +55,7 @@ public class ScreenplayMain {
 		    //create a temporary file
 			  
 			String fileName = JOptionPane.showInputDialog(null, "What would you like to name your file?\nExample: primaryReport.txt\n\nFILE HAS TO BE A .TXT EXTENSION");
-		    File logFile = new File("C:/Users/jchoi43/Documents/brianna_reports/" + fileName);
+		    File logFile = new File("C:\\Users\\aclaussen1\\Downloads\\" + fileName);
 		    
 		
 		    // This will output the full path where the file will be written to...

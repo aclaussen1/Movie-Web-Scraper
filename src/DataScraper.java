@@ -381,16 +381,21 @@ public class DataScraper {
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
 		try {
 			
+			System.out.println("here1");
 			ImdbScraper imdb = new ImdbScraper(movieName, writers);
 			
 			if(urlActive) {
 				imdb = new ImdbScraper(movieName, writers);
 			}
 			
+			System.out.println("here2");
+			
 			if(imdb.imdbSearch() == false) {
 				finalString = "\n";
 				return;
 			}
+			
+			System.out.println("here3");
 			
 			ArrayList<String> starUrls = imdb.getStarsUrls();
 			
@@ -398,16 +403,20 @@ public class DataScraper {
 				return;
 			}
 			
+			System.out.println("here4");
+			
 			UserAgent agent = new UserAgent();
 			
 			if(movieName.length() > 5 && movieName.toLowerCase().substring(movieName.length() - 5).contains(", the")) {
 				movieName = movieName.toLowerCase().replace(", the", "");
 				movieName = "the " + movieName;
+				System.out.println("here5");
 			}
 			
 			if(movieName.length() > 3 && movieName.toLowerCase().substring(movieName.length() - 3).contains(", a")) {
 				movieName = movieName.toLowerCase().replace(", a", "");
 				movieName = "a " + movieName;
+				System.out.println("here6");
 			}
 			
 			movieName = movieName.toLowerCase();
