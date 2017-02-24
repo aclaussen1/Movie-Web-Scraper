@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import com.jaunt.Element;
 import com.jaunt.Elements;
 import com.jaunt.JauntException;
+import com.jaunt.NotFound;
 import com.jaunt.UserAgent;
 import com.jaunt.component.Form;
 
@@ -113,7 +114,9 @@ public class ImdbScraper {
 			}
 			catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
 			  //System.err.println(e);
-			}
+			}   
+			
+		
 		return false;
 	}
 	
@@ -178,7 +181,7 @@ public class ImdbScraper {
 		return awardArray;
 	}
 	
-	public String getDirector() {
+	public String getDirector() throws NotFound {
 		String director = "";
 		try {
 			for(Element header : userAgent.doc.findEvery("<div class=credit_summary_item>")) {
@@ -194,7 +197,10 @@ public class ImdbScraper {
 			}
 		} catch(JauntException e) {
 			
-		}
+		} 
+
+	
+		
 		return "";
 	}
 	
@@ -216,6 +222,9 @@ public class ImdbScraper {
 		} catch(JauntException e) {
 			System.out.println(e.getMessage());
 		}
+		
+
+	
 		return null;
 	}
 	
@@ -237,6 +246,7 @@ public class ImdbScraper {
 		} catch(JauntException e) {
 			System.out.println(e.getMessage());
 		}
+
 		return null;
 	}
 	
@@ -255,7 +265,8 @@ public class ImdbScraper {
 
 		} catch(JauntException e) {
 			System.out.println(e.getMessage());
-		}
+		}  
+
 		return null;
 	}
 	
@@ -471,18 +482,27 @@ public class ImdbScraper {
 	}
 	
 	public String getReleaseDate() {
-//		try {
+		
+		
 			for(Element e : userAgent.doc.findEvery("<div class=txt-block>")) {
 				if(e.innerHTML().contains("Release Date:")) {
+					try {
 					String temp = e.innerHTML().substring(e.innerHTML().indexOf("</h4>") + 6, e.innerHTML().indexOf("("));
 					return temp;
+					} catch (NullPointerException er) {
+						return "";
+					}
+					catch(JauntException er) {
+						return "";
+					}
+					
 					//return e.getText();
 				}
 			}
-//		} catch(JauntException e) {
-//			
-//		}
-		return null;
+		
+	
+		return "";
+		
 	}
 	
 	public String getWeekendRevenue() {
@@ -502,6 +522,41 @@ public class ImdbScraper {
 			
 		}
 		return null;
+	}
+	
+	public String getCountry(){
+		
+		String country = "";
+		try {
+			System.out.println("inside try");
+			for(Element header : userAgent.doc.findEvery("<div class=txt-block>")) {
+				System.out.println("inside for");
+				
+				
+				//if(header.findEvery("<h4>").size() > 0) the line of code below deals with the special case of the movie http://www.imdb.com/title/tt0368725/?ref_=nm_flmg_act_18 The fever. For whatever reason this page does not work well with the findFirst() and 
+				if(header.findEvery("<h4>").size() > 0){
+					if(header.findFirst("<h4>").getText().contains("Country:") || header.findFirst("<h4>").getText().contains("Country:")) {
+						System.out.println("inside if");
+						for(Element spans : header.findEvery("<a>")) {
+							//if(!spans.innerHTML().contains("span")) return country;
+								if(country.length() < 1) {
+									country = country +  spans.getText();
+									System.out.println(country);
+								} else country = country +  ", " + spans.getText();
+						}
+						System.out.println(country);
+						return country;
+					}
+				}
+			}
+		} catch(JauntException e) {
+			System.out.println(e.getMessage());
+		
+		}
+		
+		return null;
+		
+		
 	}
 
 	public int basedOnNovel() {

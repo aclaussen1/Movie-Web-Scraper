@@ -31,6 +31,7 @@ public class MovielistGenerator {
 			  for (Element element : userAgent.doc.findEvery("<p>")) {
 				  //System.out.println(element.findFirst("<i>").getText());
 				  Element link = element.findFirst("<a>");
+				  System.out.println(link.getText());
 				  if (link.getText().equals("10 Things I Hate About You")) listStarted = true;
 				  if (listStarted == true) {
 					  movies2.put(link.getText(), element.findFirst("<i>").getText().replace("Written by ", ""));

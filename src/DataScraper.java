@@ -429,6 +429,7 @@ public class DataScraper {
 				
 				boolean found = false;
 				int index = 0;
+				int USAcount = 0;
 				
 				for(Element element : movieSection.findEvery("div")) {
 					if(element.innerHTML().contains("(Video)") || element.innerHTML().contains("(TV Series documentary)") || element.innerHTML().contains("(TV Series)") || element.innerHTML().contains("(TV Movie)") || element.innerHTML().contains("(Video Game)") || element.innerHTML().contains("(TV Short)") || element.innerHTML().contains("(Video short)") || element.innerHTML().contains("(TV Mini-Series)") || element.innerHTML().contains("(Short)")) {
@@ -439,7 +440,8 @@ public class DataScraper {
 					}
 					//System.out.println(imdb.getStars().split(",")[i] + ": " + element.findFirst("a").getText());
 					if(found == true) {
-						if(index > 10) break;
+						//if(index > 10 ) break;
+						if(index >= 10 && USAcount >=10) break;
 						//System.out.println(element.findFirst("a").getAt("href"));
 						ImdbScraper tempScraper = new ImdbScraper(movieName, element.findFirst("a").getAt("href"));
 						tempScraper.imdbSearch();
@@ -447,8 +449,18 @@ public class DataScraper {
 						String gross = tempScraper.getGross();
 						String budget = tempScraper.getBudget();
 						String year = tempScraper.getYear();
+						String country = tempScraper.getCountry();
+						int USA = -1;
 						
-						String subFinalString = movieName + "~" + imdb.getYear() + "~" + actor + "~" + element.findFirst("a").getText() + "~" + year + "~" + gross.replaceAll("$", "").replaceAll(",", "") + "~" + budget.replaceAll("$", "").replaceAll(",", "");
+						if (country.contains("USA")) {
+							USA = 1;
+							USAcount++;
+						}
+						else {
+							USA = 0;
+						}
+						
+						String subFinalString = movieName + "~" + imdb.getYear() + "~" + actor + "~" + element.findFirst("a").getText() + "~" + year + "~" + gross.replaceAll("$", "").replaceAll(",", "") + "~" + budget.replaceAll("$", "").replaceAll(",", "") +"~" + country + "~" + USA;
 						
 						finalString += subFinalString + "\n";
 						
@@ -467,7 +479,9 @@ public class DataScraper {
 			}
 
 		} catch(JauntException e) {
-			
+			System.out.println(e.getMessage());
+		} catch(NullPointerException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
