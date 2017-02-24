@@ -115,6 +115,25 @@ public class MojoScraper {
 		return "NOT LISTED";
 	}
 	
+	public String getMojoYear() {
+		if(movieFound == false) return "MOVIE NOT FOUND";
+		try {  
+		if(movieFound == true) {
+			//System.out.println(userAgent.doc.innerHTML());
+			for(Element element : userAgent.doc.findEvery("<td>")) {
+				//System.out.println("here1");
+				  if(element.getText().contains("Release Date")) {
+					  //System.out.println("here2");
+					  return element.findFirst("<a>").getText();
+				  }
+			 }
+		} else return "NOT LISTED";
+		} catch(JauntException e) {
+			
+		}
+		return "NOT LISTED";
+	}
+	
 	public String getMojoForeignGross() {
 		if(movieFound == false) return "MOVIE NOT FOUND";
 //		try {  

@@ -109,7 +109,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -125,6 +125,8 @@ public class ScreenplayMain {
 			   
 			//UNCOMMENT THE NEXT LINE FOR DIRECTOR-POWER
 		    if(choice == 4) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
+		    
+		    if(choice == 5) titleString = "Movie_title~imdb_year~mojo_year~RT_year";
 	
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile("C:\\Users\\aclaussen1\\Downloads\\" + fileName + ".txt", titleString) ) {
@@ -145,12 +147,13 @@ public class ScreenplayMain {
 					writer = new BufferedWriter(new FileWriter(logFile, true));
 					writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 					
+					/*
 					//following if is just for testing purposes.
 					//include this commented-out code to do a test on only one particular movie (in this case, changeling)
-					if (!key.equalsIgnoreCase("After School Special")) {
+					if (!key.equalsIgnoreCase("Bottle Rocket")) {
 						continue;
 					}
-					
+					*/
 					
 					//tests to see if this movie has already been included.
 					if(complementaryFileFound) {
@@ -168,11 +171,14 @@ public class ScreenplayMain {
 					//UNCOMMENT THE NEXT LINE TO ENABLE THE-NUMBERS.COM FINANCIAL DATA WITHOUT URLS
 					if(choice == 2) sp.doNumbersCom(key, screenPlays.get(key), false);
 					
+					
 					//UNCOMMENT THE NEXT LINE TO ENABLE STAR-POWER WITHOUT URLS
 					if(choice == 3) sp.doStarPower(key, screenPlays.get(key), false);
 					
 					//UNCOMMENT THE NEXT LINE TO ENABLE DIRECTOR-POWER WITHOUT URLS
 					if(choice == 4) sp.doDirectorPower(key, screenPlays.get(key));
+					
+					if(choice == 5) sp.doMovieTitles(key, screenPlays.get(key), false);
 					
 					String finalSentence = sp.getFinal();
 					

@@ -378,26 +378,110 @@ public class DataScraper {
 		}
 	}
 	
-	public void doStarPower(String movieName, String writers, boolean urlActive) {
+	public void doMovieTitles(String movieName, String writers, boolean urlActive) {
+		
 		try {
 			
-			System.out.println("here1");
+			System.out.println("moviename:" + movieName + " writers: " + writers);
 			ImdbScraper imdb = new ImdbScraper(movieName, writers);
 			
+			System.out.println("is urlActive:" + urlActive);
 			if(urlActive) {
 				imdb = new ImdbScraper(movieName, writers);
 			}
-			
-			System.out.println("here2");
-			
+		
 			if(imdb.imdbSearch() == false) {
-				finalString = "\n";
+				System.out.println("imdbSearch returned false. it failed");
+				//finalString = "\n";
 				return;
 			}
 			
-			System.out.println("here3");
+			System.out.println("imdbSearch returned true. Okay");
+			
+
+			UserAgent agent = new UserAgent();
+			
+			
+			
+			movieName = movieName.toLowerCase();
+			
+			String imdbYear = imdb.getYear();
+			
+			MojoScraper mojo = new MojoScraper(movieName, writers);
+			
+			if(mojo.mojoSearch() == false) {
+				System.out.println("mojoSearch returned false. it failed");
+				//finalString = "\n";
+				//return;
+			}
+			
+			
+			String mojoYear = mojo.getMojoYear();
+			if (!mojoYear.equalsIgnoreCase("MOVIE NOT FOUND")){
+					mojoYear = mojoYear.substring(mojoYear.lastIndexOf(' ') + 1);
+			}
+			System.out.println("mojoYear: " + mojoYear);
+			
+			TomatoScraper tomato = new TomatoScraper(movieName, writers);
+			if(tomato.tomatoSearch() == false) {
+				System.out.println("tomatoSearch returned false. it failed");
+				//finalString = "\n";
+				//return;
+			}
+			
+			String tomatoYear = tomato.getTomatoYear();
+			if (!tomatoYear.equalsIgnoreCase("NOT LISTED")){
+				tomatoYear = tomatoYear.substring(tomatoYear.lastIndexOf(' ') + 1);
+			}
+			System.out.println("tomatoYear: " + tomatoYear);
+			
+			
+			if(movieName.length() > 5 && movieName.toLowerCase().substring(movieName.length() - 5).contains(", the")) {
+				movieName = movieName.toLowerCase().replace(", the", "");
+				movieName = "the " + movieName;
+			}
+			
+			if(movieName.length() > 3 && movieName.toLowerCase().substring(movieName.length() - 3).contains(", a")) {
+				movieName = movieName.toLowerCase().replace(", a", "");
+				movieName = "a " + movieName;
+			}
+						
+			finalString += movieName +  "~" + imdbYear + "~" + mojoYear + "~" + tomatoYear + "\n";
+		} catch (Exception e) {
+			
+		}
+	}
+
+		
+		
+		
+
+		
+	
+	
+	public void doStarPower(String movieName, String writers, boolean urlActive) {
+		try {
+			
+			System.out.println("moviename:" + movieName + " writers: " + writers);
+			ImdbScraper imdb = new ImdbScraper(movieName, writers);
+			
+			System.out.println("is urlActive:" + urlActive);
+			if(urlActive) {
+				imdb = new ImdbScraper(movieName, writers);
+			}
+		
+			if(imdb.imdbSearch() == false) {
+				System.out.println("imdbSearch returned false. it failed");
+				finalString = "\n";
+				return;
+			}
+			System.out.println("imdbSearch returned true. Okay");
+			
 			
 			ArrayList<String> starUrls = imdb.getStarsUrls();
+			for (String url : starUrls) {   
+			    System.out.println( "Star URL: " + url);
+			}
 			
 			if(starUrls == null) {
 				return;

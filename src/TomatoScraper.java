@@ -1,5 +1,6 @@
 import com.jaunt.Element;
 import com.jaunt.JauntException;
+import com.jaunt.NotFound;
 import com.jaunt.UserAgent;
 import com.jaunt.component.Form;
 
@@ -97,6 +98,16 @@ public class TomatoScraper {
 			
 		}
 		return null;
+	}
+	
+	public String getTomatoYear()  {
+		if(movieFound == false) return "MOVIE NOT FOUND";
+		try{
+			return userAgent.doc.findFirst("<time").getText();
+		} catch(JauntException e) {
+			
+		} 
+		return "NOT LISTED";
 	}
 	
 	public String getAverageCriticRating() {
