@@ -492,9 +492,7 @@ public class ImdbScraper {
 					} catch (NullPointerException er) {
 						return "";
 					}
-					catch(JauntException er) {
-						return "";
-					}
+					
 					
 					//return e.getText();
 				}

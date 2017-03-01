@@ -14,7 +14,8 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	
+	public static String path = "C:\\Users\\Alex\\Downloads\\";
+	//"C:\\Users\\aclaussen1\\Downloads\\"
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
@@ -31,6 +32,8 @@ public class ScreenplayMain {
 	//THIS IS THE MAIN RUNNING FILE
 	
 	public static void main(String[] args) {
+		System.out.println("hi");
+		
 		ScreenplayGenerator sg = new ScreenplayGenerator();
 		
 		MovielistGenerator mg = new MovielistGenerator(); //THIS GETS THE LIST OF MOVIES
@@ -71,10 +74,10 @@ public class ScreenplayMain {
 		    //create a temporary file
 			  
 			String fileName = JOptionPane.showInputDialog(null, "What would you like to name your file?\nExample: primaryReport.txt\n\nDO NOT INCLUDE .TXT extension. This is automatically added in the code");
-		    File logFile = new File("C:\\Users\\aclaussen1\\Downloads\\" + fileName + ".txt");
+		    File logFile = new File(path + fileName + ".txt");
 		    
 		    //the purpose of the complementaryLogFile is to track which movies have been done so we can save our progress. The web scraping takes a long time. If one movie on imdb causes problems, without the complementary file, we'd need to start over. THis allows us to save progress.
-		    File complementaryLogFile = new File("C:\\Users\\aclaussen1\\Downloads\\" + fileName + "tracker.txt");
+		    File complementaryLogFile = new File(path + fileName + "tracker.txt");
 		
 		    // This will output the full path where the file will be written to...
 
@@ -96,7 +99,7 @@ public class ScreenplayMain {
 		    //Try to read complementaryLogFile. THis essential tests to see if the file already exists. If it exists, then we will continue writing to that excel/txt file where we
 		    //left off. Otherwise we have to start fresh
 		    try {
-		    	if ( parseFile("C:\\Users\\aclaussen1\\Downloads\\" + fileName + "tracker.txt", "randomString") ) {
+		    	if ( parseFile(path + fileName + "tracker.txt", "randomString") ) {
 		    		System.out.println("test successful");
 		    	}
 		    	//if this point is code is reached, then the file was found
@@ -109,7 +112,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -127,9 +130,11 @@ public class ScreenplayMain {
 		    if(choice == 4) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
 		    
 		    if(choice == 5) titleString = "Movie_title~imdb_year~mojo_year~RT_year";
+		    
+		    if(choice == 6) titleString = "Movie_title~Writers~Script Month~Script Year~Genres~Action~Adventure~Animation~Comedy~Crime~Drama~Family~Fantasy~FilmNoir~Horror~Musical~Mystery~Romance~SciFi~Short~Thriller~War~Western";
 	
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
-		    if ( !parseFile("C:\\Users\\aclaussen1\\Downloads\\" + fileName + ".txt", titleString) ) {
+		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
 		    	System.out.println("must be a new file. Writing titleString to top: " + titleString);
 	    	} else {
@@ -157,7 +162,7 @@ public class ScreenplayMain {
 					
 					//tests to see if this movie has already been included.
 					if(complementaryFileFound) {
-						if ( parseFile("C:\\Users\\aclaussen1\\Downloads\\" + fileName + "tracker.txt", key) ) {
+						if ( parseFile(path + fileName + "tracker.txt", key) ) {
 							System.out.println(key + " has already been done. Skipping to next movie.");
 				    		continue;
 				    	}
@@ -179,6 +184,8 @@ public class ScreenplayMain {
 					if(choice == 4) sp.doDirectorPower(key, screenPlays.get(key));
 					
 					if(choice == 5) sp.doMovieTitles(key, screenPlays.get(key), false);
+					
+					if(choice == 6) sp.movieImdbScriptInfo(key);
 					
 					String finalSentence = sp.getFinal();
 					
@@ -207,7 +214,7 @@ public class ScreenplayMain {
 					writer = new BufferedWriter(new FileWriter(logFile, true));
 					writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 					if(complementaryFileFound) {
-						if ( parseFile("C:\\Users\\aclaussen1\\Downloads\\" + fileName + "tracker.txt", key) ) {
+						if ( parseFile(path + fileName + "tracker.txt", key) ) {
 							System.out.println(key + " has already been done. Skipping to next movie.");
 				    		continue;
 				    	}

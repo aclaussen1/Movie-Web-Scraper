@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.StringTokenizer;
 
 import com.jaunt.component.Form;
 public class DataScraper {
@@ -454,7 +456,201 @@ public class DataScraper {
 
 		
 		
+	public void movieImdbScriptInfo(String movieName) {
+		//HashSet<String> writers = new HashSet<String>();
+		String writers = "";
+		String genres = "";
+		try {
+			UserAgent userAgent = new UserAgent();
+			userAgent.visit("http://www.imsdb.com/Movie%20Scripts/" + movieName.replace(" ", "%20") + "%20Script.html");
+			
+			
+			Element table= userAgent.doc.findFirst("<table class=script-details align=center>");
+			
+			//the strategy here is you pull everything in the table. it will pull both writers and genres, but also this thing called "read ___ Script". We Will exclude the "read___script".
+			for(Element header : table.findEvery("<td>")) {
+				
+					for(Element as: header.findEvery("<a>")) {
+						//System.out.println(as.getText());
+						if (!as.getText().contains("Read") && !as.getText().contains("Script")) {
+							if (as.getText().contains(" ")) {
+								//if there is a space, that means we know this string is a Writer, because genres are only one word, but writers have first and last names, therfore a space
+								
+								if (writers.equalsIgnoreCase("")) {
+									//then we don't have a writer yet. This is for comma formatting, we don't want to add a comma before the first writer, but after second
+									writers = as.getText();
+									
+								} else {
+									//we have already found a writer
+									writers = writers + ", " + as.getText();
+									
+								}
+							} else {
+								//if in else block, we know this is a genre
+								if (genres.equalsIgnoreCase("")) {
+									//then we don't have a writer yet. This is for comma formatting, we don't want to add a comma before the first writer, but after second
+									genres = as.getText();
+									
+								} else {
+									//we have already found a writer
+									genres = genres + ", " + as.getText();
+									
+								}
+							}
+						}
+					}
+					//System.out.println(header.findFirst("<a>").getText());
+					
+				}
+			System.out.println(writers);
+			System.out.println(genres);
+			
+			boolean hasScriptDate = false;
+			boolean hasMovieReleaseDate = false;
+			String ScriptYear = "N/A";
+			String ScriptMonth = "N/A";
+			String date1 = "";
+			String date2 = "";
+			for (Element header: table.findEvery("<b>")) {
+				
+				if (header.getText().contains("Script Date")) {
+					hasScriptDate = true;
+				}
+				if (header.getText().contains("Release Date")) {
+					hasMovieReleaseDate = true;
+				}
+			}
+			for (Element header: table.findEvery("<td>")) {
+				
+				if (header.getText().contains("January") || header.getText().contains("February") || header.getText().contains("March") || header.getText().contains("April") || header.getText().contains("May") || header.getText().contains("June") || header.getText().contains("July") || header.getText().contains("August") || header.getText().contains("September") || header.getText().contains("October") || header.getText().contains("November") || header.getText().contains("December")) {
+					if (date1.equalsIgnoreCase("")) {
+						date1= header.getText();
+					} else {
+						date2 = header.getText();
+					}
+				}
+				
+			}
+			
+			if (hasScriptDate) {
+				StringTokenizer st = new StringTokenizer(date1);
+				while (st.hasMoreTokens()) {
+			         String s = st.nextToken();
+			         if (isMonth(s) && ScriptMonth.equalsIgnoreCase("N/A")) {
+			        	 ScriptMonth = s;
+			        	 System.out.println("scriptmonth: " + s);
+			         }
+			         else if (isNumeric(s) && ScriptYear.equalsIgnoreCase("N/A")) {
+			        	 ScriptYear = s;
+			        	 System.out.println("scriptyear: " + s);
+			         }
+			     }
+				
+			}
+			int Action = 0;
+			if (genres.contains("Action")) {
+				Action = 1;
+			}
+			int Adventure = 0;
+			if (genres.contains("Action")) {
+				Adventure = 1;
+			}
+			int Animation = 0;
+			if (genres.contains("Animation")) {
+				Animation = 1;
+			}
+			int Comedy = 0;
+			if (genres.contains("Comedy")) {
+				Comedy = 1;
+			}
+			int Crime = 0;
+			if (genres.contains("Crime")) {
+				Crime = 1;
+			}
+			int Drama = 0;
+			if (genres.contains("Drama")) {
+				Drama = 1;
+			}
+			int Family = 0;
+			if (genres.contains("Family")) {
+				Family = 1;
+			}
+			int Fantasy = 0;
+			if (genres.contains("Fantasy")) {
+				Fantasy = 1;
+			}
+			int FilmNoir = 0;
+			if (genres.contains("Noir")) {
+				FilmNoir = 1;
+			}
+			int Horror = 0;
+			if (genres.contains("Horror")) {
+				Horror = 1;
+			}
+			int Musical = 0;
+			if (genres.contains("Musical")) {
+				Musical = 1;
+			}
+			int Mystery = 0;
+			if (genres.contains("Mystery")) {
+				Mystery = 1;
+			}
+			int Romance = 0;
+			if (genres.contains("Romance")) {
+				Romance = 1;
+			}
+			int SciFi = 0;
+			if (genres.contains("Sci-Fi")) {
+				SciFi = 1;
+			}
+			int Short = 0;
+			if (genres.contains("Short")) {
+				Short = 1;
+			}
+			int Thriller = 0;
+			if (genres.contains("Thriller")) {
+				Thriller = 1;
+			}
+			int War = 0;
+			if (genres.contains("War")) {
+				War = 1;
+			}
+			int Western = 0;
+			if (genres.contains("Western")) {
+				Western = 1;
+			}
+			
+			finalString += movieName +  "~" + writers + "~" + ScriptMonth + "~" + ScriptYear +"~"+ genres + "~" + Action + "~" + Adventure + "~" + Animation + "~" + Comedy + "~" + Crime + "~" + Drama + "~" + Family+ "~" + Fantasy + "~" + FilmNoir + "~" + Horror + "~" + Musical + "~" + Mystery + "~" + Romance + "~" + SciFi + "~" + Short + "~" + Thriller + "~" + War + "~" + Western + "\n";
+					
+					
+					
+					
+			
+		} catch (Exception e) {
+			
+		}
 		
+		
+		
+	}
+	
+	public boolean isMonth(String word) {
+		return word.contains("January") || word.contains("February") || word.contains("March") || word.contains("April") || word.contains("May") || word.contains("June") || word.contains("July") || word.contains("August") || word.contains("September") || word.contains("October") || word.contains("November") || word.contains("December");
+
+	}
+	
+	public static boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
+	}
 
 		
 	
