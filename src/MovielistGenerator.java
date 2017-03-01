@@ -87,17 +87,33 @@ public class MovielistGenerator {
 
             br = new BufferedReader(new FileReader(csvFile));
             while ((line = br.readLine()) != null) {
-
+            	
+            	 //regex solution to why urls aren't working. see http://stackoverflow.com/questions/1757065/java-splitting-a-comma-separated-string-but-ignoring-commas-in-quotes. Don't really understand the regex but it should work
+                 String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                 String[] urls = new String[11];
+                 int i = 0;
+                 for(String t : tokens) {
+                	 System.out.println("t:" + t + " i:" + i);
+                     urls[i] = t;
+                     i++;
+                     
+                 }
+            	
                 // use comma as separator
-                String[] urls = line.split(cvsSplitBy);
+                //String[] urls = line.split(cvsSplitBy);
                 
                 String[] urlArray = new String[5];
 
                 urlArray[0] = urls[0];
+                System.out.println("urlArray[0]" + urlArray[0]);
                 urlArray[1] = urls[3];
+                System.out.println("urlArray[1]" + urlArray[1]);
                 urlArray[2] = urls[4];
+                System.out.println("urlArray[2]" + urlArray[2]);
                 urlArray[3] = urls[5];
+                System.out.println("urlArray[3]" + urlArray[3]);
                 urlArray[4] = urls[6];
+                System.out.println("urlArray[4]" + urlArray[4]);
                 
                 
                 mainMap.put(urls[0], urlArray);

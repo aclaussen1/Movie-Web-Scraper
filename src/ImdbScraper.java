@@ -21,10 +21,12 @@ public class ImdbScraper {
 	String nameOfMovie;
 	UserAgent userAgent;
 	String movieWriters;
+
 	
 	public ImdbScraper(String movieName, String writers) {
 		nameOfMovie = movieName;
 		movieWriters = writers;
+		System.out.println("the movieWriters variable instantiated in ImdbScraper (which may be a url) is:" + movieWriters);
 	}
 	
 	/***
@@ -44,8 +46,14 @@ public class ImdbScraper {
 //			  Form f = userAgent.doc.getForm(userAgent.doc.findFirst("<form>"));
 //			  f.setTextField("q", nameOfMovie);
 //			  f.submit();
-			  if(movieWriters.contains("http")) {
+			  if (nameOfMovie.equalsIgnoreCase("Sleepy Hollow")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0162661/?ref_=nv_sr_2");
+			  } else if (nameOfMovie.equalsIgnoreCase("breakdown")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0118771/?ref_=nv_sr_2");
+			  }	
+			  else if(movieWriters.contains("http")) {
 				  //System.out.println("contains https");
+				  System.out.println("useragent is visiting this website: " + movieWriters);
 				  userAgent.visit(movieWriters);
 				  return true;
 			  } else userAgent.visit("http://www.imdb.com/search/title?title=" + nameOfMovie.replace(" ", "%20").replace(":", "%3A") + "&title_type=feature");
@@ -251,13 +259,15 @@ public class ImdbScraper {
 	}
 	
 	public ArrayList<String> getStarsUrls() {
+		System.out.println("getting star urls");
 		ArrayList<String> starUrls = new ArrayList<String>();
 		try {
+			System.out.println("here23");
 			for(Element header : userAgent.doc.findEvery("<div class=credit_summary_item>")) {
 				if(header.findFirst("<h4>").getText().contains("Star:") || header.findFirst("<h4>").getText().contains("Stars:")) {
 					for(Element spans : header.findEvery("<a>")) {
 						if(!spans.innerHTML().contains("span")) return starUrls;
-						starUrls.add(spans.getAt("href"));
+							starUrls.add(spans.getAt("href"));
 					}
 					return starUrls;
 				}

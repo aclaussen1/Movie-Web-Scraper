@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	public static String path = "C:\\Users\\Alex\\Downloads\\";
+	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//"C:\\Users\\aclaussen1\\Downloads\\"
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
@@ -209,7 +209,7 @@ public class ScreenplayMain {
 			else {
 				for (String key : urls.keySet()) { //**UNCOMMENT THIS WHEN YOU'RE USING URLS
 					
-					
+					System.out.println("working on movie: "+ key);
 					
 					writer = new BufferedWriter(new FileWriter(logFile, true));
 					writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
@@ -234,9 +234,10 @@ public class ScreenplayMain {
 					if(choice == 2) sp.doNumbersCom(key, urls.get(key)[4], true); //the-numbers.com data with urls
 					
 					//UNCOMMENT THE NEXT LINE TO ENABLE STAR-POWER WITH URLS
-					if(choice == 3) sp.doStarPower(key, urls.get(key)[1], true);
+					if(choice == 3) sp.doStarPower(key, urls.get(key)[2], true);
+					System.out.println("urls.get(key)[1]:" + urls.get(key)[2]);
 					
-					if(choice == 4) sp.doDirectorPower(key, urls.get(key)[1]);
+					if(choice == 4) sp.doDirectorPower(key, urls.get(key)[2]);
 					String finalSentence = sp.getFinal();
 					
 					if(finalSentence != null) {

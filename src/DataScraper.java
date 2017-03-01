@@ -104,7 +104,11 @@ public class DataScraper {
 		imdbNumbOscarWins = awards[2];
 		imdbNumbGoldenGlobeNominations = awards[5];
 		imdbNumbGoldenGlobeWins = awards[4];
+		try {
 		imdbDirector = imdb.getDirector();
+		} catch (Exception e) {
+			
+		}
 		imdbWriters = imdb.getWriters();
 		imdbStars = imdb.getStars();
 		imdbYear = imdb.getYear();
@@ -666,7 +670,7 @@ public class DataScraper {
 				imdb = new ImdbScraper(movieName, writers);
 			}
 		
-			if(imdb.imdbSearch() == false) {
+			if(imdb.imdbSearch() == false ) {
 				System.out.println("imdbSearch returned false. it failed");
 				finalString = "\n";
 				return;
@@ -675,6 +679,7 @@ public class DataScraper {
 			
 			
 			ArrayList<String> starUrls = imdb.getStarsUrls();
+			System.out.println("here 5000");
 			for (String url : starUrls) {   
 			    System.out.println( "Star URL: " + url);
 			}
