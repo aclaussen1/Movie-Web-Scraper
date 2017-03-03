@@ -25,8 +25,172 @@ public class MojoScraper {
 	
 	public boolean mojoSearch() {
 		try{
-			
-			  if(movieWriters.contains("http")) {
+			 if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=fantasticmrfox.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=fantasticmrfox.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("12 and holding")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=twelveandholding.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("2001: a space odyssey")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=2001.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("50-50")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=50fifty.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("50-50")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=50fifty.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("a nightmare on elm street")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=elmst.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("a perfect world")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=perfectworld.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("a.i.")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=ai.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("adaptation")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=adaptation.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("airplane")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=airplane.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("american werewolf in london")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=americanwerewolfinlondon.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("angels & demons")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=angelsanddemons.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("apocalypse now")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=apocalypsenow.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("arctic blue")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=apocalypsenow.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("arsenic and old lace")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=arsenicandoldlace.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("bodies, rest & motion")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=bodiesrestandmotion.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("body heat")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=bodyheat.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("bonfire of the vanities")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=bonfireofthevanities.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("bonnie and clyde")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=bonnieandclyde.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("cable guy")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=cableguy.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("casablanca")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=casablanca.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("charade")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=charade.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("chinatown")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=chinatown.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("cowboys & aliens")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=cowboysandaliens.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("crying game")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=cryinggame.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("dog day afternoon")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=dogdayafternoon.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("four feathers")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=fourfeathers.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("frankenstein")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=frankenstein.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("friday the 13th part viii: jason takes manhattan")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=friday13th8.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("house of 1000 corpses")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=houseof1000corpses.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("i love you phillip morris")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=iloveyouphillipmorris.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("i, robot")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=irobot.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("jaws 2")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=jaws2.htm");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("land of the dead")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=landofthedead.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("lock, stock and two smoking barrels")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=lockstockandtwosmokingbarrels.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("lord of the rings: return of the king")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=iloveyouphillipmorris.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("marty")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=marty.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("master and commander")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=masterandcommander.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("mean streets")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=meanstreets.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("men in black 3")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
+			  } 
+			 else if(movieWriters.contains("http")) {
 				  userAgent.visit(movieWriters);
 				  movieFound = true;
 
@@ -36,11 +200,13 @@ public class MojoScraper {
 				  if(nameOfMovie.contains(", The")) {
 					  nameOfMovie = nameOfMovie.replace(", The",  "");
 					  nameOfMovie = "The " + nameOfMovie;
+					  System.out.println("name of movie in mojo scrapper became:");
 				  }
 				  if(nameOfMovie.contains(", A")) {
 					  nameOfMovie = nameOfMovie.replace(", A", "");
 					  nameOfMovie = "A " + nameOfMovie;
 				  }
+				  System.out.println("mojo user agent is visiting: " + "http://www.boxofficemojo.com/search/?q=" + nameOfMovie.replace(" ", "%20"));
 				  userAgent.visit("http://www.boxofficemojo.com/search/?q=" + nameOfMovie.replace(" ", "%20"));
 				  
 			  //System.out.println(nameOfMovie);

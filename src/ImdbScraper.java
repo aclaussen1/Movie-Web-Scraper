@@ -48,9 +48,17 @@ public class ImdbScraper {
 //			  f.submit();
 			  if (nameOfMovie.equalsIgnoreCase("Sleepy Hollow")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0162661/?ref_=nv_sr_2");
+				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("breakdown")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0118771/?ref_=nv_sr_2");
-			  }	
+				  return true;
+			  }	else if (nameOfMovie.equalsIgnoreCase("Alien vs. Predator")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0370263/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0432283/?ref_=nv_sr_1");
+				  return true;
+			  }
 			  else if(movieWriters.contains("http")) {
 				  //System.out.println("contains https");
 				  System.out.println("useragent is visiting this website: " + movieWriters);

@@ -183,9 +183,11 @@ public class ScreenplayMain {
 					//UNCOMMENT THE NEXT LINE TO ENABLE DIRECTOR-POWER WITHOUT URLS
 					if(choice == 4) sp.doDirectorPower(key, screenPlays.get(key));
 					
-					if(choice == 5) sp.doMovieTitles(key, screenPlays.get(key), false);
+					if(choice == 5) sp.doMovieTitlesAndYears(key, screenPlays.get(key), false);
 					
 					if(choice == 6) sp.movieImdbScriptInfo(key);
+					
+					//if (choice == 7) sp.randomTest(key);
 					
 					String finalSentence = sp.getFinal();
 					

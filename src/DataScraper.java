@@ -384,8 +384,17 @@ public class DataScraper {
 		}
 	}
 	
-	public void doMovieTitles(String movieName, String writers, boolean urlActive) {
+	public void doMovieTitlesAndYears(String movieName, String writers, boolean urlActive) {
+			
+			//movies to exclude
+			if ( !(movieName.contains("Nightmare on") || movieName.contains("nightmare on") || movieName.contains("Adaptation") || movieName.contains("Arctic")) ) {
+				finalString = "";
+				return;
+			}
+			
 		
+			
+			System.out.println("made it here");
 		try {
 			
 			System.out.println("moviename:" + movieName + " writers: " + writers);
@@ -396,14 +405,17 @@ public class DataScraper {
 				imdb = new ImdbScraper(movieName, writers);
 			}
 		
+			String imdbYear = "";
+
 			if(imdb.imdbSearch() == false) {
 				System.out.println("imdbSearch returned false. it failed");
 				//finalString = "\n";
-				return;
+				
 			}
-			
+			else {
 			System.out.println("imdbSearch returned true. Okay");
-			
+			imdbYear = imdb.getYear();
+			}
 
 			UserAgent agent = new UserAgent();
 			
@@ -411,7 +423,8 @@ public class DataScraper {
 			
 			movieName = movieName.toLowerCase();
 			
-			String imdbYear = imdb.getYear();
+			
+			
 			
 			MojoScraper mojo = new MojoScraper(movieName, writers);
 			
@@ -423,9 +436,12 @@ public class DataScraper {
 			
 			
 			String mojoYear = mojo.getMojoYear();
+			
+			/*
 			if (!mojoYear.equalsIgnoreCase("MOVIE NOT FOUND")){
-					mojoYear = mojoYear.substring(mojoYear.lastIndexOf(' ') + 1);
+					mojoYear = mojoYear.substring(mojoYear);
 			}
+			*/
 			System.out.println("mojoYear: " + mojoYear);
 			
 			TomatoScraper tomato = new TomatoScraper(movieName, writers);
@@ -451,8 +467,13 @@ public class DataScraper {
 				movieName = movieName.toLowerCase().replace(", a", "");
 				movieName = "a " + movieName;
 			}
-						
-			finalString += movieName +  "~" + imdbYear + "~" + mojoYear + "~" + tomatoYear + "\n";
+			
+			if (imdbYear.equalsIgnoreCase("") && mojoYear.equalsIgnoreCase("") && tomatoYear.equalsIgnoreCase("") ) {
+				System.out.println("imdbYear.equalsIgnoreCase(\"\") && mojoYear.equalsIgnoreCase(\"\") && tomatoYear.equalsIgnoreCase(\"\") is true. Final string should be empty.");
+			} else {
+				System.out.println("finalString for " + movieName + ": " + finalString);
+				finalString += movieName +  "~" + imdbYear + "~" + mojoYear + "~" + tomatoYear + "\n";
+			}
 		} catch (Exception e) {
 			
 		}
@@ -868,7 +889,12 @@ public class DataScraper {
 							
 							String subFinalString = movieName + "~" + s.getYear() + "~" + director + "~" + movieDivider.findFirst("a").getText() + "~" + year + "~" + gross.replaceAll("$", "").replaceAll(",", "") + "~" + budget.replaceAll("$", "").replaceAll(",", "");
 							
+							
 							finalString += subFinalString + "\n";
+							if (finalString.equalsIgnoreCase(movieName + "\n")) {
+									finalString="";
+								
+							}
 							
 							index++;
 							

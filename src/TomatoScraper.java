@@ -23,11 +23,19 @@ public class TomatoScraper {
 	
 	public boolean tomatoSearch() {
 		try{
-
-			if(movieWriters.contains("http")) {
+			if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/1197696_fantastic_mr_fox");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Marley & Me")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }
+			  else if(movieWriters.contains("http")) {
 				userAgent.visit(movieWriters);
 				return true;
-			}
+			  }
 			  if(nameOfMovie.contains("The ")) {
 				  nameOfMovie = nameOfMovie.replace("The ",  "");
 			  }
