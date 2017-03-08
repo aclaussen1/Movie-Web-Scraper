@@ -81,10 +81,6 @@ public class MojoScraper {
 				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=apocalypsenow.htm");
 				  movieFound=true;
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("arctic blue")) {
-				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=apocalypsenow.htm");
-				  movieFound=true;
-				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("arsenic and old lace")) {
 				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=arsenicandoldlace.htm");
 				  movieFound=true;
@@ -189,6 +185,58 @@ public class MojoScraper {
 				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
 				  movieFound=true;
 				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("midnight cowboy")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=midnightcowboy.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("mighty morphin power rangers: the movie")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=powerrangers.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("mission impossible")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=missionimpossible.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("pirates of the caribbean")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=piratesofthecaribbean.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("platinum blonde")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("predator")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=predator.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("rear window")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=rearwindow.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("men in black 3")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("men in black 3")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("men in black 3")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("men in black 3")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("men in black 3")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=mib3.htm");
+				  movieFound=true;
+				  return true;
 			  } 
 			 else if(movieWriters.contains("http")) {
 				  userAgent.visit(movieWriters);
@@ -200,13 +248,18 @@ public class MojoScraper {
 				  if(nameOfMovie.contains(", The")) {
 					  nameOfMovie = nameOfMovie.replace(", The",  "");
 					  nameOfMovie = "The " + nameOfMovie;
-					  System.out.println("name of movie in mojo scrapper became:");
+					  System.out.println("name of movie in mojo scrapper became:" + nameOfMovie);
 				  }
 				  if(nameOfMovie.contains(", A")) {
 					  nameOfMovie = nameOfMovie.replace(", A", "");
 					  nameOfMovie = "A " + nameOfMovie;
+					  System.out.println("name of movie in mojo scrapper became:" + nameOfMovie);
+				  } if(nameOfMovie.contains(",")) {
+					  nameOfMovie = nameOfMovie.replace(",", "");
+					  System.out.println("name of movie in mojo scrapper became:" + nameOfMovie);
 				  }
-				  System.out.println("mojo user agent is visiting: " + "http://www.boxofficemojo.com/search/?q=" + nameOfMovie.replace(" ", "%20"));
+				  System.out.println("movieName:" + nameOfMovie);
+				  System.out.println("mojo user agent is visiting: " + "http://www.boxofficemojo.com/search/?q=" + nameOfMovie.replace(" ", "%20") );
 				  userAgent.visit("http://www.boxofficemojo.com/search/?q=" + nameOfMovie.replace(" ", "%20"));
 				  
 			  //System.out.println(nameOfMovie);
@@ -214,7 +267,11 @@ public class MojoScraper {
 			  
 			  if(movieWriters.length() > 0) writerNames = movieWriters.split(",");
 			  else return false;
-
+			  if(nameOfMovie.contains("the")) {
+				  nameOfMovie = nameOfMovie.replace(" the", "");
+				  nameOfMovie = "the " + nameOfMovie;
+				  System.out.println("name of movie in mojo scrapper became:" + nameOfMovie);
+			  }
 			  for(Element element : userAgent.doc.findEvery("<a>")) {
 				  String temp = element.getText().toLowerCase();
 				  //System.out.println(temp);
@@ -225,8 +282,10 @@ public class MojoScraper {
 					  temp = temp.replace(year, "").trim();
 					  old = true;
 				  }
+				  
 				  //System.out.println("BOX OFFICE MOJO Movie: " + temp.replace("the ", "") + " - OUR Movie: " + nameOfMovie.replace(", The", "").replace(", A",  "").toLowerCase());
 				  nameOfMovie = nameOfMovie.replace("&", "and");
+				  //System.out.println("The variable called temp (name of movie in mojo): " + temp);
 				  if( temp.equals(nameOfMovie.toLowerCase())) {
 					  
 					  userAgent.visit(element.getAt("href"));
@@ -274,11 +333,11 @@ public class MojoScraper {
 					  return element.findFirst("<b>").getText();
 				  }
 			 }
-		} else return "NOT LISTED";
+		} else return "FoundButNotListed";
 		} catch(JauntException e) {
 			
 		}
-		return "NOT LISTED";
+		return "FoundButNotListed";
 	}
 	
 	public String getMojoYear() {

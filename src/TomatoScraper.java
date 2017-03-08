@@ -1,6 +1,8 @@
 import com.jaunt.Element;
+
 import com.jaunt.JauntException;
 import com.jaunt.NotFound;
+import com.jaunt.ResponseException;
 import com.jaunt.UserAgent;
 import com.jaunt.component.Form;
 
@@ -22,6 +24,9 @@ public class TomatoScraper {
 	}
 	
 	public boolean tomatoSearch() {
+		 String nameOfMovieWithoutSpaces = nameOfMovie.replace(" ", "%20");
+		
+		
 		try{
 			if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
 				  userAgent.visit("https://www.rottentomatoes.com/m/1197696_fantastic_mr_fox");
@@ -36,21 +41,30 @@ public class TomatoScraper {
 				userAgent.visit(movieWriters);
 				return true;
 			  }
-			  if(nameOfMovie.contains("The ")) {
-				  nameOfMovie = nameOfMovie.replace("The ",  "");
+			  
+			  nameOfMovieWithoutSpaces = nameOfMovie.replace(" ", "%20");
+			  System.out.println("TomatoScaper is visiting this url: " + "https://www.rottentomatoes.com/search/?search=" + nameOfMovieWithoutSpaces.replace("the", ""));
+			  
+			  try {
+			  userAgent.visit("https://www.rottentomatoes.com/search/?search=" + nameOfMovieWithoutSpaces.replace("the", ""));
+			  } catch (Exception e) {
+				  System.out.println("here32.");
 			  }
-			  userAgent.visit("https://www.rottentomatoes.com/search/?search=" + nameOfMovie.replace(" ", "%20"));
+			  
 			  //System.out.println("RT: " + userAgent.getLocation());
 			  //if(!userAgent.getLocation().contains("/m/"))
 			  //userAgent.visit(userAgent.doc.findFirst("<div id=results_movies_tab>").findFirst("<a>").getAt("href"));
 			  //userAgent.visit(userAgent.doc.findFirst("<table class=\"results\">").findFirst("<tr class=\"even detailed\">").findFirst("<a>").getAt("href"));
 			  //System.out.println(userAgent.getLocation());
-			  Element resultsDiv = userAgent.doc.findFirst("<section id=SummaryResults>");
-			  //System.out.println("here");
-			  for(Element element : resultsDiv.findEvery("<a>")) {
-					System.out.println("here");
-				  //System.out.println(element.getText() + " - " + nameOfMovie);
-				  //System.out.println("ROTTEN TOMATOES Movie: " + element.getText().replace("The ", "") + " - OUR Movie: " + nameOfMovie.replace(", The", "").replace(", A",  ""));
+			  
+
+			  for(Element element : userAgent.doc.findEvery("<script>")) {
+				if (element.getText().contains("require(['jquery', 'globals', 'search-results', 'bootstrap'],")) {
+					
+				}
+				  //System.out.println("element.getText in Tomato Scraper: " + element.getText() + );
+				  System.out.println("ROTTEN TOMATOES Movie: " + element.getText().replace("The ", "") + " - OUR Movie: " + nameOfMovie.replace(", The", "").replace(", A",  ""));
+					
 				  if(element.getText().replace("The ", "").contains(nameOfMovie.replace(", The", "").replace(", A", ""))) {
 					  userAgent.visit(element.getAt("href"));
 					  
@@ -79,6 +93,8 @@ public class TomatoScraper {
 			}
 			catch(JauntException e){ 
 				try {
+					System.out.println("Visiting: " + userAgent.visit("https://www.rottentomatoes.com/m/" + nameOfMovie.replace(" ",  "_")));
+					movieFound = true;
 					userAgent.visit("https://www.rottentomatoes.com/m/" + nameOfMovie.replace(" ",  "_"));
 					movieFound = true;
 				}

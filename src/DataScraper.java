@@ -386,12 +386,20 @@ public class DataScraper {
 	
 	public void doMovieTitlesAndYears(String movieName, String writers, boolean urlActive) {
 			
+		/*
 			//movies to exclude
 			if ( !(movieName.contains("Nightmare on") || movieName.contains("nightmare on") || movieName.contains("Adaptation") || movieName.contains("Arctic")) ) {
 				finalString = "";
 				return;
 			}
 			
+		*/ 
+		
+		
+		if (!(movieName.contains("the") || movieName.contains("The") )) {
+			finalString = "";
+			return;
+		}
 		
 			
 			System.out.println("made it here");
