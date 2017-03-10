@@ -58,7 +58,115 @@ public class ImdbScraper {
 			  } else if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0432283/?ref_=nv_sr_1");
 				  return true;
-			  }
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("12")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0192947/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0453562/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("1492: conquest of paradise")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0103594/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("15 minutes")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0179626/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("50-50")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1306980/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("after.life")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0838247/?ref_=nv_sr_3");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("airplane 2: the sequel")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0083530/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("alien")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0078748/?ref_=fn_al_tt_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("alien 3")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0103644/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("alien nation")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0094631/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("alien: resurrection")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0118583/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("all the president's men")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0074119/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("american psycho")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0144084/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("american splendor")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0305206/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("angel eyes")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0225071/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("the american")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1440728/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("as good as it gets")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0119822/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("the assignment")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0118647/?ref_=nv_sr_3");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("austin powers - international man of mystery")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0118655/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("austin powers - the spy who shagged me")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0145660/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("avengers, the (2012)")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0848228/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("batman and robin")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0118688/?ref_=nv_sr_3");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("batman begins")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0372784/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("batman forever")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0112462/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("battle: los angeles")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1217613/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("beavis and butt-head do america")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0115641/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("bean")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0118689/?ref_=fn_al_tt_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0472033/");
+				  return true;
+			  } 
 			  else if(movieWriters.contains("http")) {
 				  //System.out.println("contains https");
 				  System.out.println("useragent is visiting this website: " + movieWriters);
