@@ -19,13 +19,19 @@ public class TomatoScraper {
 	
 	public TomatoScraper(String movieName, String writers) {
 		nameOfMovie = movieName;
+		System.out.println("last 3 letters of movie name:" + nameOfMovie.substring(nameOfMovie.length()-3,nameOfMovie.length()));
+		if (nameOfMovie.substring(nameOfMovie.length()-3,nameOfMovie.length()).equalsIgnoreCase("the")) {
+			//System.out.println(nameOfMovie+ ": this movie starts with the");
+			nameOfMovie = "the " + nameOfMovie.substring(0, nameOfMovie.length()-5);
+			System.out.println("The name of the movie now is:" + nameOfMovie);
+		}
 		  userAgent = new UserAgent();
 		  movieWriters = writers;
 	}
 	
 	public boolean tomatoSearch() {
 		 String nameOfMovieWithoutSpaces = nameOfMovie.replace(" ", "%20");
-		
+		 
 		
 		try{
 			if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
@@ -63,8 +69,40 @@ public class TomatoScraper {
 					
 				}
 				  //System.out.println("element.getText in Tomato Scraper: " + element.getText() + );
-				  System.out.println("ROTTEN TOMATOES Movie: " + element.getText().replace("The ", "") + " - OUR Movie: " + nameOfMovie.replace(", The", "").replace(", A",  ""));
-					
+				  
+				  if (element.getText().contains("mount($(")) {
+					  //System.out.println("ROTTEN TOMATOES Movie: " + element.getText() + " - OUR Movie: " + nameOfMovie.replace(", The", "").replace(", A",  ""));
+					  
+					  /*
+					   * In the HTML document for tomato, it looks like this for the search results:
+					   *  require(['jquery', 'globals', 'search-results', 'bootstrap'], function($, RT, mount) {
+                            mount($("#search-results-root").get(0), RT.PrivateApiV2FrontendHost, 'ides of march,', {"actorCount":0,"criticCount":0,"franchiseCount":0,"movieCount":1,"movies":[{"name":"The Ides of March","year":2011,"url":"/m/the_ides_of_march","image":"https://resizing.flixster.com/MHDjhbdL6eNXRkiVjU21HesDKzM=/fit-in/80x80/v1.bTsxMTE2Mzc2OTtqOzE3MzE5OzEyMDA7NjQwOzk2MA","meterClass":"certified_fresh","meterScore":84,"castItems":[{"name":"Ryan Gosling","url":"/celebrity/ryan_gosling"},{"name":"George Clooney","url":"/celebrity/george_clooney"},{"name":"Philip Seymour Hoffman","url":"/celebrity/philip_seymour_hoffman"}],"subline":"Ryan Gosling, George Clooney, Philip Seymour Hoffman, "}],"tvCount":0});
+                        });
+                        We want to isolate the JSON data. The JSON data begins at the second "{".
+                        the int i is the index of the first occurance of "{", i2 is the second occurence.
+					   */
+					  
+					  int i = element.getText().indexOf("{");
+					  int i2 = element.getText().indexOf("{",i+1
+							  );
+					  int ending = element.getText().indexOf(");");
+					  String JSONstring = element.getText().substring(i2, ending);
+					  System.out.println("JSONSTRING: " + JSONstring);
+					  
+					  JSONObject obj = new JSONObject(JSONstring);
+					  JSONArray arr = obj.getJSONArray("movies");
+					  for (int j = 0; j < arr.length(); j++)
+					  {
+					      String JSONmovieName = arr.getJSONObject(j).getString("name");
+					      System.out.println("tomato search generated this movie name:" + JSONmovieName);
+					      if (JSONmovieName.equalsIgnoreCase(nameOfMovie)) {
+					    	  System.out.println("User agent is visiting:https://www.rottentomatoes.com" + arr.getJSONObject(j).getString("url"));
+					    	  userAgent.visit("https://www.rottentomatoes.com" + arr.getJSONObject(j).getString("url"));
+					    	  movieFound=true;
+							  return true;
+					      }
+					  }
+				  }
 				  if(element.getText().replace("The ", "").contains(nameOfMovie.replace(", The", "").replace(", A", ""))) {
 					  userAgent.visit(element.getAt("href"));
 					  

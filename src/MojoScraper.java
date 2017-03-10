@@ -258,6 +258,11 @@ public class MojoScraper {
 					  nameOfMovie = nameOfMovie.replace(",", "");
 					  System.out.println("name of movie in mojo scrapper became:" + nameOfMovie);
 				  }
+				  if (nameOfMovie.substring(nameOfMovie.length()-3,nameOfMovie.length()).equalsIgnoreCase("the")) {
+						//System.out.println(nameOfMovie+ ": this movie starts with the");
+						nameOfMovie = "the " + nameOfMovie.substring(0, nameOfMovie.length()-4);
+						System.out.println("The name of the movie now in mojoScaper is:" + nameOfMovie);
+					}
 				  System.out.println("movieName:" + nameOfMovie);
 				  System.out.println("mojo user agent is visiting: " + "http://www.boxofficemojo.com/search/?q=" + nameOfMovie.replace(" ", "%20") );
 				  userAgent.visit("http://www.boxofficemojo.com/search/?q=" + nameOfMovie.replace(" ", "%20"));
@@ -267,11 +272,7 @@ public class MojoScraper {
 			  
 			  if(movieWriters.length() > 0) writerNames = movieWriters.split(",");
 			  else return false;
-			  if(nameOfMovie.contains("the")) {
-				  nameOfMovie = nameOfMovie.replace(" the", "");
-				  nameOfMovie = "the " + nameOfMovie;
-				  System.out.println("name of movie in mojo scrapper became:" + nameOfMovie);
-			  }
+			  
 			  for(Element element : userAgent.doc.findEvery("<a>")) {
 				  String temp = element.getText().toLowerCase();
 				  //System.out.println(temp);
@@ -287,7 +288,7 @@ public class MojoScraper {
 				  nameOfMovie = nameOfMovie.replace("&", "and");
 				  //System.out.println("The variable called temp (name of movie in mojo): " + temp);
 				  if( temp.equals(nameOfMovie.toLowerCase())) {
-					  
+					  System.out.println("mojo user Agent is visiting:" + element.getAt("href"));
 					  userAgent.visit(element.getAt("href"));
 					  movieFound = true;
 					  return true;

@@ -395,12 +395,12 @@ public class DataScraper {
 			
 		*/ 
 		
-		
+		/*
 		if (!(movieName.contains("the") || movieName.contains("The") )) {
 			finalString = "";
 			return;
 		}
-		
+		*/
 			
 			System.out.println("made it here");
 		try {
