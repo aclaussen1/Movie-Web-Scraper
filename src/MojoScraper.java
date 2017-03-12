@@ -701,8 +701,8 @@ public class MojoScraper {
 				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=crazystupidlove.htm");
 				  //movieFound=true;
 				  return false;
-			  }else if (nameOfMovie.equalsIgnoreCase("crazy, stupid, love")) {
-				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=crazystupidlove.htm");
+			  }else if (nameOfMovie.equalsIgnoreCase("se7en")) {
+				  userAgent.visit("http://www.boxofficemojo.com/movies/?id=seven.htm");
 				  movieFound=true;
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("crazy, stupid, love")) {
