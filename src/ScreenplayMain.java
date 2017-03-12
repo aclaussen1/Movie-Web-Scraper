@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
+	//public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//
-	//public static String path = "C:\\Users\\Alex\\Downloads\\";
+	public static String path = "C:\\Users\\Alex\\Downloads\\";
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
