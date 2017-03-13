@@ -653,7 +653,7 @@ public class ImdbScraper {
 				  userAgent.visit("http://www.imdb.com/title/tt1125849/?ref_=nv_sr_1");
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("the x-files: fight the future")) {
-				  userAgent.visit("http://www.imdb.com/title/tt0120902/?ref_=fn_al_tt_3");
+				  userAgent.visit("http://www.imdb.com/title/tt0120902/");
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("x-men")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0120903/?ref_=nv_sr_5");

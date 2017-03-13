@@ -400,6 +400,13 @@ public class DataScraper {
 			finalString = "";
 			return;
 		}
+		
+		
+		if (!(movieName.contains("9")  )) {
+			finalString = "";
+			return;
+		}
+		
 		*/
 			
 			System.out.println("made it here");
@@ -450,6 +457,10 @@ public class DataScraper {
 					mojoYear = mojoYear.substring(mojoYear);
 			}
 			*/
+			
+			if (!mojoYear.equalsIgnoreCase("not listed") && !mojoYear.equalsIgnoreCase("movie not found")) {
+				mojoYear = mojoYear.substring(mojoYear.length()-4,mojoYear.length());
+			}
 			System.out.println("mojoYear: " + mojoYear);
 			
 			TomatoScraper tomato = new TomatoScraper(movieName, writers);
@@ -457,10 +468,16 @@ public class DataScraper {
 				System.out.println("tomatoSearch returned false. it failed");
 				//finalString = "\n";
 				//return;
+			} else {
+				System.out.println("tomatoSearch returned true");
 			}
-			
-			String tomatoYear = tomato.getTomatoYear();
-			if (!tomatoYear.equalsIgnoreCase("NOT LISTED")){
+			String tomatoYear = "";
+			try {
+			tomatoYear = tomato.getTomatoYear();
+			} catch (Exception e) {
+				System.out.println("getTomatoYear() failed");
+			}
+			if (!(tomatoYear.equalsIgnoreCase("NOT LISTED") || tomatoYear.equalsIgnoreCase("MOVIE NOT FOUND"))){
 				tomatoYear = tomatoYear.substring(tomatoYear.lastIndexOf(' ') + 1);
 			}
 			System.out.println("tomatoYear: " + tomatoYear);
@@ -479,8 +496,10 @@ public class DataScraper {
 			if (imdbYear.equalsIgnoreCase("") && mojoYear.equalsIgnoreCase("") && tomatoYear.equalsIgnoreCase("") ) {
 				System.out.println("imdbYear.equalsIgnoreCase(\"\") && mojoYear.equalsIgnoreCase(\"\") && tomatoYear.equalsIgnoreCase(\"\") is true. Final string should be empty.");
 			} else {
-				System.out.println("finalString for " + movieName + ": " + finalString);
+				
+				
 				finalString += movieName +  "~" + imdbYear + "~" + mojoYear + "~" + tomatoYear + "\n";
+				System.out.println("finalString for " + movieName + ": " + finalString);
 			}
 		} catch (Exception e) {
 			

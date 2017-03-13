@@ -19,12 +19,17 @@ public class TomatoScraper {
 	
 	public TomatoScraper(String movieName, String writers) {
 		nameOfMovie = movieName;
+		try {
 		System.out.println("last 3 letters of movie name:" + nameOfMovie.substring(nameOfMovie.length()-3,nameOfMovie.length()));
-		if (nameOfMovie.substring(nameOfMovie.length()-3,nameOfMovie.length()).equalsIgnoreCase("the")) {
-			//System.out.println(nameOfMovie+ ": this movie starts with the");
-			nameOfMovie = "the " + nameOfMovie.substring(0, nameOfMovie.length()-5);
-			System.out.println("The name of the movie now is:" + nameOfMovie);
+			if (nameOfMovie.substring(nameOfMovie.length()-3,nameOfMovie.length()).equalsIgnoreCase("the")) {
+				//System.out.println(nameOfMovie+ ": this movie starts with the");
+				nameOfMovie = "the " + nameOfMovie.substring(0, nameOfMovie.length()-5);
+				System.out.println("The name of the movie now is:" + nameOfMovie);
+			}
+		} catch (Exception e) {
+			System.out.println("This movie title must be under 3 words.");
 		}
+		
 		  userAgent = new UserAgent();
 		  movieWriters = writers;
 	}
@@ -44,6 +49,7 @@ public class TomatoScraper {
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
 				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
 				  movieFound=true;
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
