@@ -395,13 +395,13 @@ public class DataScraper {
 			
 		*/ 
 		
-		/*
-		if (!(movieName.contains("the") || movieName.contains("The") )) {
+		
+		if (!(movieName.contains("Matrix")  )) {
 			finalString = "";
 			return;
 		}
 		
-		
+		/*
 		if (!(movieName.contains("9")  )) {
 			finalString = "";
 			return;
@@ -428,8 +428,9 @@ public class DataScraper {
 				
 			}
 			else {
-			System.out.println("imdbSearch returned true. Okay");
+			
 			imdbYear = imdb.getYear();
+			System.out.println("imdbSearch returned true. imdbYear:" + imdbYear);
 			}
 
 			UserAgent agent = new UserAgent();

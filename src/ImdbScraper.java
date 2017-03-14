@@ -26,6 +26,7 @@ public class ImdbScraper {
 	public ImdbScraper(String movieName, String writers) {
 		nameOfMovie = movieName;
 		movieWriters = writers;
+		System.out.println("the nameOfMovie variable instantiated in ImdbScraper (which may be a url) is:" + nameOfMovie);
 		System.out.println("the movieWriters variable instantiated in ImdbScraper (which may be a url) is:" + movieWriters);
 	}
 	
@@ -106,7 +107,8 @@ public class ImdbScraper {
 			  } else if (nameOfMovie.equalsIgnoreCase("angel eyes")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0225071/?ref_=nv_sr_1");
 				  return true;
-			  } else if (nameOfMovie.equalsIgnoreCase("the american")) {
+			  } else if (nameOfMovie.equalsIgnoreCase("American, The")) {
+				  System.out.println("working on the american. visitng http://www.imdb.com/title/tt1440728/?ref_=nv_sr_2");
 				  userAgent.visit("http://www.imdb.com/title/tt1440728/?ref_=nv_sr_2");
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("as good as it gets")) {
@@ -232,7 +234,7 @@ public class ImdbScraper {
 			  } else if (nameOfMovie.equalsIgnoreCase("evil dead ii: dead by dawn")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0092991/?ref_=nv_sr_1");
 				  return true;
-			  } else if (nameOfMovie.equalsIgnoreCase("the fabulous baker boys")) {
+			  } else if (nameOfMovie.equalsIgnoreCase("fabulous baker boys, the")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0097322/?ref_=nv_sr_1");
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("face off")) {
@@ -670,7 +672,118 @@ public class ImdbScraper {
 			  } else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
 				  return true;
-			  } 
+			  } else if (nameOfMovie.equalsIgnoreCase("Assassins")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0112401/?ref_=nv_sr_8");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Assignment, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0118647/?ref_=nv_sr_4");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Basquiat")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0115632/?ref_=fn_al_tt_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Burlesque")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1126591/?ref_=fn_al_tt_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("crow, the")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0109506/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Day the Earth Stood Still, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0043456/?ref_=fn_al_tt_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Distinguished Gentleman, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0104114/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Fabulous Baker Boys, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0097322/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Flintstones, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0109813/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Game, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0119174/?ref_=fn_al_tt_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Imaginarium of Doctor Parnassus, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1054606/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Last of the Mohicans, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0104691/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Life")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0123964/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Lord of the Rings: Fellowship of the Ring, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0120737/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Matrix, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0133093/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Neverending Story, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0088323/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Nick of Time")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0113972/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Pretty Woman")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0100405/?ref_=fn_al_tt_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Producer, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0063462/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Proposal, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1041829/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Relic, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0120004/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Rock, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0117500/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Ruins, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0963794/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Saint, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0120053/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Sandlot Kids, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0108037/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Searchers, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0049730/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Someone To Watch Over Me")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0094008/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Sphere")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0120184/?ref_=fn_al_tt_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Spider-Man")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0145487/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Sting, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0070735/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Time Machine, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0268695/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Visitor, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0857191/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("World is not Enough, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0143145/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Wrestler, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1125849/?ref_=nv_sr_2");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("X-Files: Fight the Future, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0120902/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }
 			  else if(movieWriters.contains("http")) {
 				  //System.out.println("contains https");
 				  System.out.println("useragent is visiting this website: " + movieWriters);
