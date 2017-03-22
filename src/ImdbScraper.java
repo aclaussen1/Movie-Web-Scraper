@@ -837,41 +837,41 @@ public class ImdbScraper {
 			  }else if (nameOfMovie.equalsIgnoreCase("Mr Blandings Builds His Dream House")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0040613/");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Mr Deeds Goes to Town")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0027996/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("My Mother Dreams the Satan's Disciples in New York")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0177023/");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Ni vu ni connu")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0051989/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Orgy of the Dead")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0054240/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Petulia")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0063426/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Night Time (The Poltergeist Treatment)")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0084516/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("RKO 281")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0120801/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Un Singe en Hiver")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0056636/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Warm Springs")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0423510/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Wild Things: Diamonds in the Rough")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0448179/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Little Mermaid, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0097757/?ref_=nv_sr_2");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("Machete")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0985694/?ref_=nv_sr_2");
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
@@ -1149,6 +1149,29 @@ public class ImdbScraper {
 			} else year = "NOT FOUND";
 			//return year;
 			return year;
+		} catch(JauntException e) {
+			
+		}
+		return null;
+	}
+	
+	public String getIMDBTitle() {
+		String imdbTitle = "";
+		try {
+			if(userAgent.doc.findFirst("<title>") != null && !userAgent.doc.findFirst("<title>").equals(""))
+			imdbTitle = userAgent.doc.findFirst("<title>").getText();
+			else imdbTitle = "NOT FOUND";
+			/*
+			if(year.contains("(") && year.contains(")")) {
+				year = year.substring(year.indexOf("(") + 1, year.indexOf(")"));
+			} else year = "NOT FOUND";
+			//return year;
+			return year;
+			*/
+			if(imdbTitle.contains("(") && imdbTitle.contains(")")) {
+				imdbTitle = imdbTitle.substring(0, imdbTitle.indexOf("(") -1);
+			} else imdbTitle = "NOT FOUND";
+			return imdbTitle;
 		} catch(JauntException e) {
 			
 		}

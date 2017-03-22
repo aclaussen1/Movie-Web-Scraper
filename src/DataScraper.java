@@ -904,7 +904,7 @@ public class DataScraper {
 	public void doDirectorPower(String movieName, String writers) {
 		
 		
-		if (!(movieName.contains("Godfather")  )) {
+		if (!(movieName.contains("Visitor, The")  )) {
 			finalString = "";
 			return;
 		}
@@ -942,7 +942,7 @@ public class DataScraper {
 			}
 			
 			movieName = movieName.toLowerCase();
-			
+			String imdbMovieName = s.getIMDBTitle();
 			UserAgent userAgent = new UserAgent();
 			
 			System.out.println("made it here in DataScaper 1");
@@ -1040,20 +1040,14 @@ public class DataScraper {
 								System.out.println("Mr. Blandings Builds His Dream House dealing with period");
 								continue;
 							}
-						}else if (movieName.equalsIgnoreCase("Les Tontons Flingueurs")) {
-							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Monsieur Gangster")) {
+						}else if (movieName.equalsIgnoreCase("Warm Springs")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Warm Springs")) {
 								currentMovieFound = true;
-								System.out.println("Les Tontons Flingueurs is known as Monsieur Gangster");
+								System.out.println("dealing with issue with Warm Springs");
 								continue;
 							}
-						}else if (movieName.equalsIgnoreCase("Les Tontons Flingueurs")) {
-							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Monsieur Gangster")) {
-								currentMovieFound = true;
-								System.out.println("Les Tontons Flingueurs is known as Monsieur Gangster");
-								continue;
-							}
-						}else if (movieName.equalsIgnoreCase("Les Tontons Flingueurs")) {
-							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Monsieur Gangster")) {
+						}else if (movieName.equalsIgnoreCase("Wild Things: Diamonds in the Rough")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Wild Things: Diamonds in the Rough")) {
 								currentMovieFound = true;
 								System.out.println("Les Tontons Flingueurs is known as Monsieur Gangster");
 								continue;
@@ -1070,6 +1064,7 @@ public class DataScraper {
 							System.out.println("Working on :" + movieDivider.findFirst("a").getAt("href"));
 							if(index == 10) break;
 							ImdbScraper tempScraper = new ImdbScraper(movieName, movieDivider.findFirst("a").getAt("href"),false);
+							System.out.println("In Data Scaper, created and IMDBScraper with movie title:" + tempScraper.getIMDBTitle());
 							tempScraper.imdbSearch();
 							String director = s.getDirector();
 							String gross = tempScraper.getGross();
@@ -1097,8 +1092,8 @@ public class DataScraper {
 								}
 							}
 							//System.out.println("Paramter movie: " + movieName + " --- Imdb Movie Name: " + movieDivider.findFirst("a").getText().toLowerCase());
-							if(movieDivider.findFirst("<a>").getText().toLowerCase().contains(movieName)) {
-								//System.out.println("match found");
+							if(movieDivider.findFirst("<a>").getText().toLowerCase().equalsIgnoreCase(imdbMovieName)) {
+								System.out.println(movieDivider.findFirst("<a>").getText());
 								currentMovieFound = true;
 							}
 						}
