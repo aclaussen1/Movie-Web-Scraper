@@ -5,6 +5,7 @@ import com.jaunt.Element;
 import com.jaunt.Elements;
 import com.jaunt.JauntException;
 import com.jaunt.NotFound;
+import com.jaunt.ResponseException;
 import com.jaunt.UserAgent;
 import com.jaunt.component.Form;
 
@@ -28,6 +29,20 @@ public class ImdbScraper {
 		movieWriters = writers;
 		System.out.println("the nameOfMovie variable instantiated in ImdbScraper (which may be a url) is:" + nameOfMovie);
 		System.out.println("the movieWriters variable instantiated in ImdbScraper (which may be a url) is:" + movieWriters);
+	}
+	
+	//constructor with URL. boolean is just to distinguish between the other constructor and is never used
+	public ImdbScraper(String movieName, String imdbURL, boolean fakeVariable) {
+		nameOfMovie = movieName;
+		//when this Scraper was first coded, this constructor didnt exist, only the one above.  the movieWriters variable was set to hold the URL sometimes. I haven't fixed it so its more clear.
+		movieWriters = imdbURL;
+		userAgent = new UserAgent();
+		try {
+			userAgent.visit(imdbURL);
+		} catch (ResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/***
@@ -780,16 +795,105 @@ public class ImdbScraper {
 			  } else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
 				  return true;
-			  } else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+			  } else if (nameOfMovie.equalsIgnoreCase("Adventures of Buckaroo Banzai Across the Eighth Dimension, The")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0086856/?ref_=nv_sr_1");
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("American Shaolin: King of Kickboxers II")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0101327/");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Arcade")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0106302/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Avventura, L' (The Adventure)")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0053619/");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Back to the Future II & III")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0096874/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Batman 2")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Dry White Season, A")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0097243/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Halloween: The Curse of Michael Myers")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0113253/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Hellraiser: Deader")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0337636/?ref_=nm_flmg_dr_18");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Henry Fool")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0122529/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Jeux Interdits")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0043686/");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Le Diable par la Queue")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0064232/");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Les Tontons Flingueurs")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0057591/");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("Mr Blandings Builds His Dream House")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0040613/");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
 				  return true;
 			  }
+			  
 			  else if(movieWriters.contains("http")) {
 				  //System.out.println("contains https");
 				  System.out.println("useragent is visiting this website: " + movieWriters);
 				  userAgent.visit(movieWriters);
 				  return true;
-			  } else userAgent.visit("http://www.imdb.com/search/title?title=" + nameOfMovie.replace(" ", "%20").replace(":", "%3A") + "&title_type=feature");
+			  } 
+			   else userAgent.visit("http://www.imdb.com/search/title?title=" + nameOfMovie.replace(" ", "%20").replace(":", "%3A") + "&title_type=feature");
 			  //System.out.println(userAgent.getLocation());
 
 			  Boolean searchFound = false;

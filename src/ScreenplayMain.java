@@ -113,7 +113,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -133,7 +133,9 @@ public class ScreenplayMain {
 		    if(choice == 5) titleString = "Movie_title~imdb_year~mojo_year~RT_year";
 		    
 		    if(choice == 6) titleString = "Movie_title~Writers~Script Month~Script Year~Genres~Action~Adventure~Animation~Comedy~Crime~Drama~Family~Fantasy~FilmNoir~Horror~Musical~Mystery~Romance~SciFi~Short~Thriller~War~Western";
-	
+		    
+		    
+		    if(choice == 7) titleString = "MOVIE_ID~Movie Title~Country~USA";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -210,68 +212,111 @@ public class ScreenplayMain {
 			}
 	
 			else {
-				for (String key : urls.keySet()) { //**UNCOMMENT THIS WHEN YOU'RE USING URLS
-					
-					System.out.println("working on movie: "+ key);
-					
-					writer = new BufferedWriter(new FileWriter(logFile, true));
-					writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-					if(complementaryFileFound) {
-						if ( parseFile(path + fileName + "tracker.txt", key) ) {
-							System.out.println(key + " has already been done. Skipping to next movie.");
-				    		continue;
-				    	}
+				if(choice != 7) {
+					for (String key : urls.keySet()) { //**UNCOMMENT THIS WHEN YOU'RE USING URLS
+						
+						System.out.println("working on movie: "+ key);
+						
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						//System.out.println(key);
+						//System.out.println(key + " - WRITERS: " + screenPlays.get(key));
+						//if(!key.contains(":")) continue;
+						
+						//GENERIC DATA SCRAPER CONSTRUCTOR
+			
+						
+						//UNCOMMENT THE NEXT LINE TO ENABLE PRIMARY 3 SCRAPING WITH URLS
+						if(choice == 1) sp.doPrimaryThree(key, urls.get(key), true); //normal data with urls
+						
+						//UNCOMMENT THE NEXT LINE TO ENABLE THE-NUMBERS.COM FINANCIAL DATA WITH URLS
+						if(choice == 2) sp.doNumbersCom(key, urls.get(key)[4], true); //the-numbers.com data with urls
+						
+						//UNCOMMENT THE NEXT LINE TO ENABLE STAR-POWER WITH URLS
+						if(choice == 3) sp.doStarPower(key, urls.get(key)[2], true);
+						System.out.println("urls.get(key)[1]:" + urls.get(key)[2]);
+						
+						if(choice == 4) sp.doDirectorPower(key, urls.get(key)[2]);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+						//index++;
+						//if(index == 5) break;
+						//System.out.print("\n----------------------------------------\n");
 					}
-					DataScraper sp = new DataScraper();
-					//System.out.println(key);
-					//System.out.println(key + " - WRITERS: " + screenPlays.get(key));
-					//if(!key.contains(":")) continue;
-					
-					//GENERIC DATA SCRAPER CONSTRUCTOR
-		
-					
-					//UNCOMMENT THE NEXT LINE TO ENABLE PRIMARY 3 SCRAPING WITH URLS
-					if(choice == 1) sp.doPrimaryThree(key, urls.get(key), true); //normal data with urls
-					
-					//UNCOMMENT THE NEXT LINE TO ENABLE THE-NUMBERS.COM FINANCIAL DATA WITH URLS
-					if(choice == 2) sp.doNumbersCom(key, urls.get(key)[4], true); //the-numbers.com data with urls
-					
-					//UNCOMMENT THE NEXT LINE TO ENABLE STAR-POWER WITH URLS
-					if(choice == 3) sp.doStarPower(key, urls.get(key)[2], true);
-					System.out.println("urls.get(key)[1]:" + urls.get(key)[2]);
-					
-					if(choice == 4) sp.doDirectorPower(key, urls.get(key)[2]);
-					String finalSentence = sp.getFinal();
-					
-					if(finalSentence != null) {
-						System.out.println(finalSentence);
-						finalSentence = finalSentence.replaceAll("$", "");
-						finalSentence = finalSentence + "\n";
-					}
-					else {
-						System.out.println("here" + key);
-						if(choice < 3) finalSentence = key + "\n";
-						else finalSentence = "\n" + key + "\n";
-					}
-					//finalSentence = finalSentence + "\n";
-					
-		//			if(finalSentence == null) {
-		//
-		//			}
-		//			
-					if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
-					
-					writer.write(finalSentence);
-					writer.close();
-					writer2.write(key);
-					writer2.close();
-					//index++;
-					//if(index == 5) break;
-					//System.out.print("\n----------------------------------------\n");
 				}
+				else { // choice ==7 
+					for (String key : urls.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						sp.MovieCountryMarch14Report(urls.get(key)[5],urls.get(key)[2], null);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(key + "~" + finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+						//index++;
+						//if(index == 5) break;
+						//System.out.print("\n----------------------------------------\n");
+					}
+				}
+
 			}
-
-
+			
 		  } catch (Exception e) {
 			    e.printStackTrace();
 		  } finally {

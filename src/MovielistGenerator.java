@@ -102,7 +102,7 @@ public class MovielistGenerator {
                 // use comma as separator
                 //String[] urls = line.split(cvsSplitBy);
                 
-                String[] urlArray = new String[5];
+                String[] urlArray = new String[6];
 
                 urlArray[0] = urls[0];
                 System.out.println("urlArray[0]" + urlArray[0]);
@@ -114,7 +114,8 @@ public class MovielistGenerator {
                 System.out.println("urlArray[3]" + urlArray[3]);
                 urlArray[4] = urls[6];
                 System.out.println("urlArray[4]" + urlArray[4]);
-                
+                urlArray[5] = urls[1];
+                System.out.println("urlArray[5]" + urlArray[5]);
                 
                 mainMap.put(urls[0], urlArray);
                 

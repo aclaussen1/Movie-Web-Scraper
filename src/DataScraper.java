@@ -384,6 +384,77 @@ public class DataScraper {
 		}
 	}
 	
+	public void MovieCountryMarch14Report(String movieName, String imdbURL, String BoxOfficeURL) {
+		System.out.println("working on movie:" + movieName + " with imdbURL: "  + imdbURL);
+		/*
+			//movies to exclude
+			if ( !(movieName.contains("Nightmare on") || movieName.contains("nightmare on") || movieName.contains("Adaptation") || movieName.contains("Arctic")) ) {
+				finalString = "";
+				return;
+			}
+			
+		*/ 
+		
+		/*
+		if (!(movieName.contains("Matrix")  )) {
+			finalString = "";
+			return;
+		}
+		*/
+		/*
+		if (!(movieName.contains("9")  )) {
+			finalString = "";
+			return;
+		}
+		
+		*/
+			
+			System.out.println("made it here");
+		try {
+			
+			System.out.println("moviename:" + movieName + " imdbURL: " + imdbURL);
+			String countryInfo="";
+			
+			
+			ImdbScraper imdb = new ImdbScraper(movieName, imdbURL, true);
+		
+			String imdbCountry = "";
+
+			try {
+				imdbCountry = imdb.getCountry();
+				System.out.println("imdbSearch returned true. imdbYear:" + imdbCountry);
+			} catch (Exception e){
+				System.out.println("could not find country info from imdb");
+			
+			}
+
+			
+			
+			
+			/*
+			if (imdbCountry.equalsIgnoreCase("")); {
+				MojoScraper mojo = new MojoScraper(movieName, BoxOfficeURL, true);
+			
+			
+				String mojoCountry = mojo.getMojoCountry();
+			}
+			*/
+			
+			
+			int USA = 0;
+			if (imdbCountry.contains("USA")) {
+				USA = 1;
+			}
+			
+			
+			finalString += movieName +  "~" + imdbCountry + "~" + USA + "\n";
+			System.out.println("finalString for " + movieName + ": " + finalString);
+			
+		} catch (Exception e) {
+			
+		}
+	}
+	
 	public void doMovieTitlesAndYears(String movieName, String writers, boolean urlActive) {
 			
 		/*
@@ -831,7 +902,13 @@ public class DataScraper {
 	}
 	
 	public void doDirectorPower(String movieName, String writers) {
-
+		
+		
+		if (!(movieName.contains("Godfather")  )) {
+			finalString = "";
+			return;
+		}
+		
 		
 		//movieName = movieName.toLowerCase();
 		
@@ -841,8 +918,17 @@ public class DataScraper {
 			
 			s = new ImdbScraper(movieName, writers);
 			
+			try {
+				boolean hi = s.imdbSearch();
+			} catch (Exception e) {
+				System.out.println("imdbSearch caused an exception");
+			}
+			
 			if(s.imdbSearch() == false) {
+				System.out.println("In DataScarper, s.imdbSearch() returned false.");
 				return;
+			} else {
+				System.out.println("imdb search returned true.");
 			}
 			
 			if(movieName.length() > 5 && movieName.toLowerCase().substring(movieName.length() - 5).contains(", the")) {
@@ -859,6 +945,7 @@ public class DataScraper {
 			
 			UserAgent userAgent = new UserAgent();
 			
+			System.out.println("made it here in DataScaper 1");
 
 			
 			finalString = "";
@@ -868,8 +955,10 @@ public class DataScraper {
 				return;
 			}
 			
+			System.out.println("made it here in DataScaper 2");
+			
 			for(String directorLink : directorUrls) {
-				
+				System.out.println("directorLink: "  + directorLink);
 				userAgent.visit(directorLink);
 				
 				Element filmographyBlock = null;
@@ -883,8 +972,11 @@ public class DataScraper {
 				}
 				
 				if(filmographyBlock == null) {
+					System.out.println("Filmography Block null");
 					finalString = "\n";
 					return;
+				} else {
+					System.out.println("Filmography Block not null");
 				}
 				
 				//Element filmographyBlock = userAgent.doc.findFirst("<div class=filmo-category-section>");
@@ -899,15 +991,85 @@ public class DataScraper {
 					int index = 0;
 					
 					for(Element movieDivider : filmographyBlock.findEvery("<div>")) {
+						
+						if (movieName.equalsIgnoreCase("Arcade")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Arcade")) {
+								currentMovieFound = true;
+								System.out.println("movieDivider.findFirst(\"<a>\").getText().equalsIgnoreCase(\"Arcade (Video)\")" + "is True");
+								continue;
+							}
+						} else if (movieName.equalsIgnoreCase("Avventura, L' (The Adventure)")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("L'Avventura")) {
+								currentMovieFound = true;
+								System.out.println("L'Avventura found on Director's page.");
+								continue;
+							}
+						} else if (movieName.equalsIgnoreCase("Back to the Future II & III")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Back to the Future Part II")) {
+								currentMovieFound = true;
+								System.out.println("L'Avventura found on Director's page.");
+								continue;
+							}
+						}else if (movieName.equalsIgnoreCase("Hellraiser: Deader")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Hellraiser: Deader")) {
+								currentMovieFound = true;
+								System.out.println(".");
+								continue;
+							}
+						}else if (movieName.equalsIgnoreCase("Jeux Interdits")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Forbidden Games")) {
+								currentMovieFound = true;
+								System.out.println("Jeux Interdits is known as Forbindden games");
+								continue;
+							}
+						} else if (movieName.equalsIgnoreCase("Le Diable par la Queue")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("The Devil by the Tail")) {
+								currentMovieFound = true;
+								System.out.println("Le Diable par la Queue is known as The Devil by the Tail");
+								continue;
+							}
+						} else if (movieName.equalsIgnoreCase("Les Tontons Flingueurs")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Monsieur Gangster")) {
+								currentMovieFound = true;
+								System.out.println("Les Tontons Flingueurs is known as Monsieur Gangster");
+								continue;
+							}
+						} else if (movieName.equalsIgnoreCase("Mr Blandings Builds His Dream House")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Mr. Blandings Builds His Dream House")) {
+								currentMovieFound = true;
+								System.out.println("Mr. Blandings Builds His Dream House dealing with period");
+								continue;
+							}
+						}else if (movieName.equalsIgnoreCase("Les Tontons Flingueurs")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Monsieur Gangster")) {
+								currentMovieFound = true;
+								System.out.println("Les Tontons Flingueurs is known as Monsieur Gangster");
+								continue;
+							}
+						}else if (movieName.equalsIgnoreCase("Les Tontons Flingueurs")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Monsieur Gangster")) {
+								currentMovieFound = true;
+								System.out.println("Les Tontons Flingueurs is known as Monsieur Gangster");
+								continue;
+							}
+						}else if (movieName.equalsIgnoreCase("Les Tontons Flingueurs")) {
+							if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("Monsieur Gangster")) {
+								currentMovieFound = true;
+								System.out.println("Les Tontons Flingueurs is known as Monsieur Gangster");
+								continue;
+							}
+						}
 						if(movieDivider.innerHTML().contains("(Video)") || movieDivider.innerHTML().contains("(TV Series documentary)") || movieDivider.innerHTML().contains("(TV Series)") || movieDivider.innerHTML().contains("(TV Movie)") || movieDivider.innerHTML().contains("(Video Game)") || movieDivider.innerHTML().contains("(TV Short)") || movieDivider.innerHTML().contains("(Video short)") || movieDivider.innerHTML().contains("(TV Mini-Series)") || movieDivider.innerHTML().contains("(Short)")) {
+							System.out.println("skipping: " + movieDivider.innerHTML() );
 							continue;
 						}
 						if(!movieDivider.innerHTML().contains("year_column")) {
 							continue;
 						}
 						if(currentMovieFound == true) {
+							System.out.println("Working on :" + movieDivider.findFirst("a").getAt("href"));
 							if(index == 10) break;
-							ImdbScraper tempScraper = new ImdbScraper(movieName, movieDivider.findFirst("a").getAt("href"));
+							ImdbScraper tempScraper = new ImdbScraper(movieName, movieDivider.findFirst("a").getAt("href"),false);
 							tempScraper.imdbSearch();
 							String director = s.getDirector();
 							String gross = tempScraper.getGross();
@@ -928,6 +1090,12 @@ public class DataScraper {
 							
 							
 						} else {
+							System.out.println("else statement because currentMovieFound=false. movieDivider.findFirst(\"<a>\").getText():" + movieDivider.findFirst("<a>").getText());
+							if (movieName.equalsIgnoreCase("American Shaolin: King of Kickboxers II")) {
+								if(movieDivider.findFirst("<a>").getText().equalsIgnoreCase("American Shaolin")) {
+									currentMovieFound = true;
+								}
+							}
 							//System.out.println("Paramter movie: " + movieName + " --- Imdb Movie Name: " + movieDivider.findFirst("a").getText().toLowerCase());
 							if(movieDivider.findFirst("<a>").getText().toLowerCase().contains(movieName)) {
 								//System.out.println("match found");

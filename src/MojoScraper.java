@@ -1,5 +1,6 @@
 import com.jaunt.Element;
 import com.jaunt.JauntException;
+import com.jaunt.ResponseException;
 import com.jaunt.UserAgent;
 
 public class MojoScraper {
@@ -21,6 +22,18 @@ public class MojoScraper {
 		nameOfMovie = movieName;
 		  userAgent = new UserAgent();
 		movieWriters = writers;
+	}
+	
+	public MojoScraper(String movieName, String mojoURL, boolean fakeVariable) {
+		nameOfMovie = movieName;
+		  userAgent = new UserAgent();
+		  try {
+			userAgent.visit(mojoURL);
+		} catch (ResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		  movieFound = true;
 	}
 	
 	public boolean mojoSearch() {
