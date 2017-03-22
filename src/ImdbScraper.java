@@ -22,11 +22,13 @@ public class ImdbScraper {
 	String nameOfMovie;
 	UserAgent userAgent;
 	String movieWriters;
+	boolean constructedWithURL;
 
 	
 	public ImdbScraper(String movieName, String writers) {
 		nameOfMovie = movieName;
 		movieWriters = writers;
+		constructedWithURL = false;
 		System.out.println("the nameOfMovie variable instantiated in ImdbScraper (which may be a url) is:" + nameOfMovie);
 		System.out.println("the movieWriters variable instantiated in ImdbScraper (which may be a url) is:" + movieWriters);
 	}
@@ -34,6 +36,7 @@ public class ImdbScraper {
 	//constructor with URL. boolean is just to distinguish between the other constructor and is never used
 	public ImdbScraper(String movieName, String imdbURL, boolean fakeVariable) {
 		nameOfMovie = movieName;
+		constructedWithURL = true;
 		//when this Scraper was first coded, this constructor didnt exist, only the one above.  the movieWriters variable was set to hold the URL sometimes. I haven't fixed it so its more clear.
 		movieWriters = imdbURL;
 		userAgent = new UserAgent();
@@ -55,6 +58,10 @@ public class ImdbScraper {
 	 */
 	
 	public boolean imdbSearch() {
+		if (constructedWithURL) {
+			//in the constructor with URLs, the userAgent has already been directed to the correct URL
+			return true;
+		}
 		try{
 			  userAgent = new UserAgent(); 
 			  //create new userAgent (headless browser).

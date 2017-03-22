@@ -780,16 +780,27 @@ public class DataScraper {
 	
 	
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
+		
+		if (!(movieName.contains("2012")  )) {
+			finalString = "";
+			return;
+		}
+		
+		
 		try {
 			
 			System.out.println("moviename:" + movieName + " writers: " + writers);
 			ImdbScraper imdb = new ImdbScraper(movieName, writers);
 			
+			
 			System.out.println("is urlActive:" + urlActive);
 			if(urlActive) {
-				imdb = new ImdbScraper(movieName, writers);
+				imdb = new ImdbScraper(movieName, writers,true);
+				
 			}
 		
+			String imdbTitle = imdb.getIMDBTitle();
+			
 			if(imdb.imdbSearch() == false ) {
 				System.out.println("imdbSearch returned false. it failed");
 				finalString = "\n";
@@ -837,6 +848,7 @@ public class DataScraper {
 				int USAcount = 0;
 				
 				for(Element element : movieSection.findEvery("div")) {
+					System.out.println("index: " + index + " innerHTML: " + element.innerHTML());
 					if(element.innerHTML().contains("(Video)") || element.innerHTML().contains("(TV Series documentary)") || element.innerHTML().contains("(TV Series)") || element.innerHTML().contains("(TV Movie)") || element.innerHTML().contains("(Video Game)") || element.innerHTML().contains("(TV Short)") || element.innerHTML().contains("(Video short)") || element.innerHTML().contains("(TV Mini-Series)") || element.innerHTML().contains("(Short)")) {
 						continue;
 					}
@@ -871,7 +883,7 @@ public class DataScraper {
 						
 						index++;
 					} else {
-						if(element.findFirst("a").getText().toLowerCase().contains(movieName)) {
+						if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase(imdbTitle)) {
 							//System.out.println(starUrls.get(i));
 							//System.out.println("------------------------");
 							found = true;
@@ -903,12 +915,12 @@ public class DataScraper {
 	
 	public void doDirectorPower(String movieName, String writers) {
 		
-		
-		if (!(movieName.contains("Visitor, The")  )) {
+		/*
+		if (!(movieName.contains("Who Framed Roger Rabbit?")  )) {
 			finalString = "";
 			return;
 		}
-		
+		*/
 		
 		//movieName = movieName.toLowerCase();
 		

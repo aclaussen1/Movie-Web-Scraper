@@ -56,6 +56,7 @@ public class ScreenplayMain {
         
         if(usingUrls) {
 	        JFileChooser fileChooser = new JFileChooser();
+	        screenPlays = mg.getMovies();
 	        int returnValue = fileChooser.showOpenDialog(new JFrame());
 	        if (returnValue == JFileChooser.APPROVE_OPTION) {
 	          File selectedFile = fileChooser.getSelectedFile();
@@ -113,7 +114,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -136,6 +137,10 @@ public class ScreenplayMain {
 		    
 		    
 		    if(choice == 7) titleString = "MOVIE_ID~Movie Title~Country~USA";
+		    
+		    if(choice == 8) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
+		    
+		    if(choice == 9) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -212,7 +217,155 @@ public class ScreenplayMain {
 			}
 	
 			else {
-				if(choice != 7) {
+				if(choice == 8) {
+					//We want to generate a DIrectorPower Report in one swoop. So we are going to do URLs first.
+					
+					for (String key : urls.keySet()) {
+						System.out.println("working on movie: "+ key);
+						
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						sp.doDirectorPower(key, urls.get(key)[2]);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+
+					}
+					
+					//now deal with non-URLs
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						
+						System.out.println("Working on:" + key);
+						DataScraper sp = new DataScraper();
+						sp.doDirectorPower(key, screenPlays.get(key));
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							finalSentence = finalSentence.replaceAll("$", "");
+						}
+						else finalSentence = "\n" + key + "\n";
+			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+						
+						index++;
+					}
+				}
+				else if (choice==9) {
+					for (String key : urls.keySet()) {
+						System.out.println("working on movie: "+ key);
+						
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						sp.doStarPower(key, urls.get(key)[2],true);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+
+					}
+					
+					//now deal with non-URLs
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						
+						System.out.println("Working on:" + key);
+						DataScraper sp = new DataScraper();
+						sp.doStarPower(key, screenPlays.get(key),false);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							finalSentence = finalSentence.replaceAll("$", "");
+						}
+						else finalSentence = "\n" + key + "\n";
+			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+						
+						index++;
+					}
+				}
+				else if(choice != 7) {
 					for (String key : urls.keySet()) { //**UNCOMMENT THIS WHEN YOU'RE USING URLS
 						
 						System.out.println("working on movie: "+ key);
