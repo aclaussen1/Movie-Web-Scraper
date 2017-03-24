@@ -126,7 +126,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -153,6 +153,8 @@ public class ScreenplayMain {
 		    if(choice == 8) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
 		    
 		    if(choice == 9) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
+		    
+		    if(choice == 10) titleString = "Movie Title~Country~USA";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -377,7 +379,85 @@ public class ScreenplayMain {
 						index++;
 					}
 				}
-				else if(choice != 7) {
+				else if (choice == 10){ 
+					
+					for (String key : urls.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						sp.MovieCountryMarch14Report(urls.get(key)[0],urls.get(key)[2], null);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+						//index++;
+						//if(index == 5) break;
+						//System.out.print("\n----------------------------------------\n");
+					} 
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						sp.MovieCountryMarch14Report(key,null, screenPlays.get(key));
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+					}
+					
+					
+				}
+				else if(choice != 7 && choice != 10) {
 					for (String key : urls.keySet()) { //**UNCOMMENT THIS WHEN YOU'RE USING URLS
 						
 						System.out.println("working on movie: "+ key);
@@ -439,46 +519,7 @@ public class ScreenplayMain {
 						//System.out.print("\n----------------------------------------\n");
 					}
 				}
-				else { // choice ==7 
-					for (String key : urls.keySet()) {
-						writer = new BufferedWriter(new FileWriter(logFile, true));
-						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
-								System.out.println(key + " has already been done. Skipping to next movie.");
-					    		continue;
-					    	}
-						}
-						DataScraper sp = new DataScraper();
-						sp.MovieCountryMarch14Report(urls.get(key)[5],urls.get(key)[2], null);
-						String finalSentence = sp.getFinal();
-						
-						if(finalSentence != null) {
-							System.out.println(finalSentence);
-							finalSentence = finalSentence.replaceAll("$", "");
-							finalSentence = finalSentence + "\n";
-						}else {
-							System.out.println("here" + key);
-							if(choice < 3) finalSentence = key + "\n";
-							else finalSentence = "\n" + key + "\n";
-						}
-						//finalSentence = finalSentence + "\n";
-						
-			//			if(finalSentence == null) {
-			//
-			//			}
-			//			
-						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
-						
-						writer.write(key + "~" + finalSentence);
-						writer.close();
-						writer2.write(key);
-						writer2.close();
-						//index++;
-						//if(index == 5) break;
-						//System.out.print("\n----------------------------------------\n");
-					}
-				}
+				
 
 			}
 			

@@ -31,6 +31,7 @@ public class ImdbScraper {
 		constructedWithURL = false;
 		System.out.println("the nameOfMovie variable instantiated in ImdbScraper (which may be a url) is:" + nameOfMovie);
 		System.out.println("the movieWriters variable instantiated in ImdbScraper (which may be a url) is:" + movieWriters);
+		
 	}
 	
 	//constructor with URL. boolean is just to distinguish between the other constructor and is never used

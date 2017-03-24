@@ -385,7 +385,7 @@ public class DataScraper {
 		}
 	}
 	
-	public void MovieCountryMarch14Report(String movieName, String imdbURL, String BoxOfficeURL) {
+	public void MovieCountryMarch14Report(String movieName, String imdbURL, String movieWriters) {
 		System.out.println("working on movie:" + movieName + " with imdbURL: "  + imdbURL);
 		/*
 			//movies to exclude
@@ -416,8 +416,14 @@ public class DataScraper {
 			System.out.println("moviename:" + movieName + " imdbURL: " + imdbURL);
 			String countryInfo="";
 			
-			
-			ImdbScraper imdb = new ImdbScraper(movieName, imdbURL, true);
+			ImdbScraper imdb;
+			if (imdbURL== null) {
+				imdb = new ImdbScraper(movieName, movieWriters);
+				imdb.imdbSearch();
+			}
+			else {
+				imdb = new ImdbScraper(movieName, imdbURL, true);
+			}
 		
 			String imdbCountry = "";
 
@@ -795,12 +801,12 @@ public class DataScraper {
 	
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
 		
-		
+		/*
 		if (!containsIgnoreCase(movieName,"Star wars: a new hope")  ) {
 			finalString = "";
 			return;
 		}
-		
+		*/
 		
 		try {
 			
