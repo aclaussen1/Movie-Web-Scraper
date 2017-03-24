@@ -776,12 +776,26 @@ public class DataScraper {
 	  return true;  
 	}
 
+	public static boolean containsIgnoreCase(String str, String searchStr)     {
+	    if(str == null || searchStr == null) return false;
+
+	    final int length = searchStr.length();
+	    if (length == 0)
+	        return true;
+
+	    for (int i = str.length() - length; i >= 0; i--) {
+	        if (str.regionMatches(true, i, searchStr, 0, length))
+	            return true;
+	    }
+	    return false;
+	}
 		
 	
 	
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
 		
-		if (!(movieName.contains("2012")  )) {
+		
+		if (!containsIgnoreCase(movieName,"Dark Star")  ) {
 			finalString = "";
 			return;
 		}
@@ -796,16 +810,20 @@ public class DataScraper {
 			System.out.println("is urlActive:" + urlActive);
 			if(urlActive) {
 				imdb = new ImdbScraper(movieName, writers,true);
-				
 			}
-		
-			String imdbTitle = imdb.getIMDBTitle();
+			
+			
+			
+			
 			
 			if(imdb.imdbSearch() == false ) {
 				System.out.println("imdbSearch returned false. it failed");
 				finalString = "\n";
 				return;
 			}
+			
+			String imdbTitle = imdb.getIMDBTitle();
+			
 			System.out.println("imdbSearch returned true. Okay");
 			
 			

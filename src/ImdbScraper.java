@@ -880,7 +880,7 @@ public class ImdbScraper {
 			  }else if (nameOfMovie.equalsIgnoreCase("Machete")) {
 				  userAgent.visit("http://www.imdb.com/title/tt0985694/?ref_=nv_sr_2");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+			  }else if (nameOfMovie.equalsIgnoreCase("get carter")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {

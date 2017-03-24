@@ -14,22 +14,34 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
+	//public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//
-	//public static String path = "C:\\Users\\Alex\\Downloads\\";
+	public static String path = "C:\\Users\\Alex\\Downloads\\";
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
         
         while(scan.hasNext()){
             String line = scan.nextLine().toString();
-            if(line.contains(searchStr)){
+            if(line.equalsIgnoreCase(searchStr)){
                 return true;
             }
         }
         return false;
     }
-	
+	public static boolean containsIgnoreCase(String str, String searchStr)     {
+	    if(str == null || searchStr == null) return false;
+
+	    final int length = searchStr.length();
+	    if (length == 0)
+	        return true;
+
+	    for (int i = str.length() - length; i >= 0; i--) {
+	        if (str.regionMatches(true, i, searchStr, 0, length))
+	            return true;
+	    }
+	    return false;
+	}
 	//THIS IS THE MAIN RUNNING FILE
 	
 	public static void main(String[] args) {
@@ -329,7 +341,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 
 					}
@@ -359,7 +371,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 						
 						index++;
