@@ -881,6 +881,60 @@ public class ImdbScraper {
 				  userAgent.visit("http://www.imdb.com/title/tt0985694/?ref_=nv_sr_2");
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("get carter")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0067128/");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("cobb")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
@@ -1108,9 +1162,13 @@ public class ImdbScraper {
 		try {
 			System.out.println("here23");
 			for(Element header : userAgent.doc.findEvery("<div class=credit_summary_item>")) {
+				System.out.println("here12");
+				System.out.println(header.findFirst("<h4>").getText());
 				if(header.findFirst("<h4>").getText().contains("Star:") || header.findFirst("<h4>").getText().contains("Stars:")) {
+					
 					for(Element spans : header.findEvery("<a>")) {
 						if(!spans.innerHTML().contains("span")) return starUrls;
+							System.out.println("here14");
 							starUrls.add(spans.getAt("href"));
 					}
 					return starUrls;

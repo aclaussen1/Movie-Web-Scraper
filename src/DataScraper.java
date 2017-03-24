@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import com.jaunt.component.Form;
@@ -795,7 +796,7 @@ public class DataScraper {
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
 		
 		
-		if (!containsIgnoreCase(movieName,"Dark Star")  ) {
+		if (!containsIgnoreCase(movieName,"Star wars: a new hope")  ) {
 			finalString = "";
 			return;
 		}
@@ -824,7 +825,8 @@ public class DataScraper {
 			
 			String imdbTitle = imdb.getIMDBTitle();
 			
-			System.out.println("imdbSearch returned true. Okay");
+			
+			System.out.println("imdbSearch returned true. Okay. URL visiting: " + imdb.userAgent.doc.getUrl());
 			
 			
 			ArrayList<String> starUrls = imdb.getStarsUrls();
@@ -857,22 +859,49 @@ public class DataScraper {
 			
 			for(int i = 0; i < starUrls.size(); i++) {
 				System.out.println("------------------------");
+				System.out.println("visiting: " + starUrls.get(i));
 				agent.visit(starUrls.get(i));
+				;
+				/*
+				 * This block of code deals with issues on the IMDB Page where certain people are primarily directors yet
+				 * starred in a movie. Originally the code just had 
+				 * Element movieSection = agent.doc.findFirst("div class=filmo-category-section");
+				 * instead of this whole code block. The problem was on a page like: 
+				 * http://www.imdb.com/name/nm0639321/?ref_=tt_ov_st_sm
+				 * this guy is primarily a writer, so the findFirst() method will go through those movies when really we
+				 * are concerned with the guy as a writer. It took me a while to figure out the fix but basically you have 
+				 * to work with Jaunt and use the findEvery then filter out the one's that aren't dealing with actors.
+				 */
+				Elements potentialMovieSections = agent.doc.findEvery("div class=filmo-category-section");
 				
-				Element movieSection = agent.doc.findFirst("div class=filmo-category-section");
+				Element movieSection = null;
+				for (Element e: potentialMovieSections) {
+					
+						//System.out.println(e.findFirst("div").getAt("id"));
+						if(e.findFirst("div").getAt("id").contains("actor") || e.findFirst("div").getAt("id").contains("actress")) {
+							movieSection = e;
+						}
+				}
+				
+				
+				
 				
 				boolean found = false;
 				int index = 0;
 				int USAcount = 0;
 				
+				System.out.println("here21334");
+				
 				for(Element element : movieSection.findEvery("div")) {
-					System.out.println("index: " + index + " innerHTML: " + element.innerHTML());
+					System.out.println("here34");
 					if(element.innerHTML().contains("(Video)") || element.innerHTML().contains("(TV Series documentary)") || element.innerHTML().contains("(TV Series)") || element.innerHTML().contains("(TV Movie)") || element.innerHTML().contains("(Video Game)") || element.innerHTML().contains("(TV Short)") || element.innerHTML().contains("(Video short)") || element.innerHTML().contains("(TV Mini-Series)") || element.innerHTML().contains("(Short)")) {
 						continue;
 					}
 					if(!element.innerHTML().contains("year_column")) {
 						continue;
 					}
+					System.out.println("here3344");
+					System.out.println("index: " + index + " innerHTML: " + element.innerHTML());
 					//System.out.println(imdb.getStars().split(",")[i] + ": " + element.findFirst("a").getText());
 					if(found == true) {
 						//if(index > 10 ) break;
@@ -886,7 +915,7 @@ public class DataScraper {
 						String year = tempScraper.getYear();
 						String country = tempScraper.getCountry();
 						int USA = -1;
-						
+						System.out.println("here32342344");
 						if (country.contains("USA")) {
 							USA = 1;
 							USAcount++;
@@ -916,6 +945,8 @@ public class DataScraper {
 		} catch(JauntException e) {
 			System.out.println(e.getMessage());
 		} catch(NullPointerException e) {
+			System.out.println(e.getMessage());
+		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
