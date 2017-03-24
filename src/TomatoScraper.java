@@ -1,5 +1,5 @@
 import com.jaunt.Element;
-
+import com.jaunt.Elements;
 import com.jaunt.JauntException;
 import com.jaunt.NotFound;
 import com.jaunt.ResponseException;
@@ -32,6 +32,18 @@ public class TomatoScraper {
 		
 		  userAgent = new UserAgent();
 		  movieWriters = writers;
+	}
+	
+	public TomatoScraper(String movieName, String tomatoURL, boolean fakeVariable) {
+		nameOfMovie = movieName;
+
+		userAgent = new UserAgent();
+		try {
+			userAgent.visit(tomatoURL);
+		} catch (ResponseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean tomatoSearch() {
@@ -681,6 +693,56 @@ public class TomatoScraper {
 //		}
 		return null;
 	}
+	
+	public String getGenres() {
+		if(movieFound == false) return "MOVIE NOT FOUND";
+		
+		String tomatoGenres = "";
+		
+		Elements potentialMovieSections = userAgent.doc.findEvery("<li class='meta-row clearfix'>");
+		
+		Element movieSection = null;
+		//int index =0;
+		for (Element e: potentialMovieSections) {
+			//System.out.println("index: " + index);
+			//index++;
+			/*
+				try {
+					System.out.println(e.findFirst("div").getText());
+				} catch (NotFound e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			*/
+				try {
+					if(e.findFirst("div").getText().contains("Genre") || e.findFirst("div").getText().contains("Genres")) {
+						movieSection = e;
+						System.out.println("found genres in tomato");
+						
+					}
+				} catch (NotFound e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		}
+		
+		Elements genreHTMLElements = movieSection.findEvery("a");
+		for (Element el: genreHTMLElements) {
+			System.out.println(el.getText().trim());
+			
+			if (tomatoGenres.equalsIgnoreCase("")) {
+				//first genre
+				tomatoGenres += el.getText().trim();
+			} else {
+				//this genre is second or later...
+				tomatoGenres += ", " + el.getText().trim();
+			}
+			
+		}
+		
+		return tomatoGenres;
+	}
+	
 	
 	public String getAudienceRating() {
 		if(movieFound == false) return "MOVIE NOT FOUND";

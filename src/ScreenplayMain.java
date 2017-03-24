@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	//public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
+	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//
-	public static String path = "C:\\Users\\Alex\\Downloads\\";
+	//public static String path = "C:\\Users\\Alex\\Downloads\\";
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
@@ -126,7 +126,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -155,6 +155,7 @@ public class ScreenplayMain {
 		    if(choice == 9) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
 		    
 		    if(choice == 10) titleString = "Movie Title~Country~USA";
+		    if(choice == 11) titleString = "Movie Title~MojoGenre~RottenTomatosGenre~TheNumbersGenre";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -392,6 +393,87 @@ public class ScreenplayMain {
 						}
 						DataScraper sp = new DataScraper();
 						sp.MovieCountryMarch14Report(urls.get(key)[0],urls.get(key)[2], null);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+						//index++;
+						//if(index == 5) break;
+						//System.out.print("\n----------------------------------------\n");
+					} 
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						sp.MovieCountryMarch14Report(key,null, screenPlays.get(key));
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key);
+						writer2.close();
+					}
+					
+					
+				}
+				
+				else if (choice == 11){ 
+					System.out.println("Starting code for choice 11");
+					for (String key : urls.keySet()) {
+						System.out.println("working on: " + key);
+						//working with urls
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						if(complementaryFileFound) {
+							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						}
+						DataScraper sp = new DataScraper();
+						sp.doGenresFromAllSources(urls.get(key)[0],urls.get(key)[2],urls.get(key)[3],urls.get(key)[4],urls.get(key)[6],null);
 						String finalSentence = sp.getFinal();
 						
 						if(finalSentence != null) {

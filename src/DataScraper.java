@@ -801,12 +801,12 @@ public class DataScraper {
 	
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
 		
-		/*
-		if (!containsIgnoreCase(movieName,"Star wars: a new hope")  ) {
+		
+		if (!containsIgnoreCase(movieName,"top gun")  ) {
 			finalString = "";
 			return;
 		}
-		*/
+		
 		
 		try {
 			
@@ -912,7 +912,7 @@ public class DataScraper {
 					if(found == true) {
 						//if(index > 10 ) break;
 						if(index >= 10 && USAcount >=10) break;
-						//System.out.println(element.findFirst("a").getAt("href"));
+						System.out.println("element.findFirst(\"a\").getAt(\"href\"): " + element.findFirst("a").getAt("href"));
 						ImdbScraper tempScraper = new ImdbScraper(movieName, element.findFirst("a").getAt("href"));
 						tempScraper.imdbSearch();
 						String actor = imdb.getStars().split(",")[i];
@@ -966,6 +966,52 @@ public class DataScraper {
 	
 	public DataScraper() {
 		
+	}
+	
+	public void doGenresFromAllSources(String movieName, String imdbURL, String BoxOfficeMojoURL, String RottenTomatoURL, String TheNumbersURL, String writers) {
+		try {
+			
+			ImdbScraper s;
+			String imdbGenres;
+			if(imdbURL == null) {
+				s = new ImdbScraper(movieName, writers);
+				if(s.imdbSearch() == false) {
+					System.out.println("In DataScarper, s.imdbSearch() returned false.");
+					return;
+				} else {
+					System.out.println("imdbSearch returned true. Okay. URL visiting: " + s.userAgent.doc.getUrl());
+					imdbGenres = s.getGenres();
+				}
+			} else {
+				//URLS where included
+				System.out.println("imdb url is: " + imdbURL);
+				s = new ImdbScraper(movieName, imdbURL, true);
+				imdbGenres = s.getGenres();
+				System.out.println("imdb genres:" + imdbGenres);
+			}
+			
+			TomatoScraper t;
+			String tomatoGenres;
+			if(RottenTomatoURL == null) {
+				t = new TomatoScraper(movieName, writers);
+				if(t.tomatoSearch() == false) {
+					System.out.println("In DataScarper, tomatoScraper.Search() returned false.");
+					return;
+				} else {
+					System.out.println("tomato returned true. Okay. URL visiting: " + t.userAgent.doc.getUrl());
+					tomatoGenres = t.getGenres();
+				}
+			} else {
+				//URLS where included
+				t = new TomatoScraper(movieName, RottenTomatoURL, true);
+				tomatoGenres = t.getGenres();
+				System.out.println("tomato genres:" + tomatoGenres);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void doDirectorPower(String movieName, String writers) {
