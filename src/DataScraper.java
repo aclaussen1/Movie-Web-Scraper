@@ -561,6 +561,15 @@ public class DataScraper {
 			}
 			System.out.println("tomatoYear: " + tomatoYear);
 			
+			NumbersScraper ns = new NumbersScraper(movieName, writers);
+			String numbersYear = "";
+			try {
+				ns.numbersSearch();
+				numbersYear =  ns.getYear();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			
 			if(movieName.length() > 5 && movieName.toLowerCase().substring(movieName.length() - 5).contains(", the")) {
 				movieName = movieName.toLowerCase().replace(", the", "");
@@ -577,7 +586,7 @@ public class DataScraper {
 			} else {
 				
 				
-				finalString += movieName +  "~" + imdbYear + "~" + mojoYear + "~" + tomatoYear + "\n";
+				finalString += movieName +  "~" + imdbYear + "~" + mojoYear + "~" + tomatoYear + "~" + numbersYear + "\n";
 				System.out.println("finalString for " + movieName + ": " + finalString);
 			}
 		} catch (Exception e) {

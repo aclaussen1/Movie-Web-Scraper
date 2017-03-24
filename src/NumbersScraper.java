@@ -45,7 +45,7 @@ public class NumbersScraper {
 			  nameOfMovie = nameOfMovie.replace(":", "");
 		  }
 		  
-			userAgent.visit("http:/http://www.the-numbers.com/search?searchterm==" + nameOfMovie.replace(" ", "+"));
+			userAgent.visit("http://www.the-numbers.com/search?searchterm=" + nameOfMovie.replace(" ", "+"));
 			
 			
 			/*
@@ -61,7 +61,7 @@ public class NumbersScraper {
 						}
 					} catch (NotFound e1) {
 
-						e1.printStackTrace();
+						//e1.printStackTrace();
 					}
 			}
 			
@@ -73,6 +73,7 @@ public class NumbersScraper {
 					System.out.println(e.getAt("href"));
 					if(e.getAt("href").contains("movie")) {
 						userAgent.visit(e.getAt("href"));
+						movieFound = true;
 					}
 				} catch (NotFound e1) {
 					// TODO Auto-generated catch block
@@ -106,6 +107,46 @@ public class NumbersScraper {
 					  //System.out.println("here2");
 					  System.out.println("genre:" + element.getText());
 					  return element.getText();
+				  }
+			 }
+		} else return "NOT LISTED";
+		} catch(JauntException e) {
+			
+		}
+		return "NOT LISTED";
+	}
+	
+	public String getName() {
+		if(movieFound == false) return "MOVIE NOT FOUND";
+		try {  
+		if(movieFound == true) {
+			//System.out.println(userAgent.doc.innerHTML());
+			for(Element element : userAgent.doc.findEvery("<h1>")) {
+				//System.out.println("element.getText():" + element.getText());
+				  if(element.getAt("itemprop").contains("name")) {
+					  //System.out.println("here2");
+					  //System.out.println("The name of this movie is:" + element.getText());
+					  return element.getText().substring(0, element.getText().length()-7);
+				  }
+			 }
+		} else return "NOT LISTED";
+		} catch(JauntException e) {
+			
+		}
+		return "NOT LISTED";
+	}
+	
+	public String getYear() {
+		if(movieFound == false) return "MOVIE NOT FOUND";
+		try {  
+		if(movieFound == true) {
+			//System.out.println(userAgent.doc.innerHTML());
+			for(Element element : userAgent.doc.findEvery("<h1>")) {
+				//System.out.println("element.getText():" + element.getText());
+				  if(element.getAt("itemprop").contains("name")) {
+					  //System.out.println("here2");
+					  //System.out.println("The name of this movie is:" + element.getText());
+					  return element.getText().substring(element.getText().length()-5, element.getText().length()-1);
 				  }
 			 }
 		} else return "NOT LISTED";

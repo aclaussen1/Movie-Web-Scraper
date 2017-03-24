@@ -126,7 +126,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources\n12 = test for numbers(doesn't generate report)");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -143,7 +143,7 @@ public class ScreenplayMain {
 			//UNCOMMENT THE NEXT LINE FOR DIRECTOR-POWER
 		    if(choice == 4) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
 		    
-		    if(choice == 5) titleString = "Movie_title~imdb_year~mojo_year~RT_year";
+		    if(choice == 5) titleString = "Movie_title~imdb_year~mojo_year~RT_year~Numbers_Year";
 		    
 		    if(choice == 6) titleString = "Movie_title~Writers~Script Month~Script Year~Genres~Action~Adventure~Animation~Comedy~Crime~Drama~Family~Fantasy~FilmNoir~Horror~Musical~Mystery~Romance~SciFi~Short~Thriller~War~Western";
 		    
@@ -209,6 +209,18 @@ public class ScreenplayMain {
 					if(choice == 5) sp.doMovieTitlesAndYears(key, screenPlays.get(key), false);
 					
 					if(choice == 6) sp.movieImdbScriptInfo(key);
+					
+					if(choice == 12) {
+						NumbersScraper n = new NumbersScraper(key, screenPlays.get(key));
+						
+						try {
+						n.numbersSearch();
+						System.out.println("Name of movie in numbers:" + n.getName());
+						System.out.println("Year of movie in numbers:" + n.getYear());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
 					
 					//if (choice == 7) sp.randomTest(key);
 					
