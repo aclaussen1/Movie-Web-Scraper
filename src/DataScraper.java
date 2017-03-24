@@ -1008,6 +1008,38 @@ public class DataScraper {
 				System.out.println("tomato genres:" + tomatoGenres);
 			}
 			
+			MojoScraper m;
+			String mojoGenres;
+			if(BoxOfficeMojoURL == null) {
+				m = new MojoScraper(movieName, writers);
+				if(m.mojoSearch() == false) {
+					System.out.println("In DataScarper, mojoScraper.Search() returned false.");
+					return;
+				} else {
+					System.out.println("mojo returned true. Okay. URL visiting: " + m.userAgent.doc.getUrl());
+					mojoGenres = m.getGenres();
+					System.out.println("mojo genres:" + mojoGenres);
+				}
+			} else {
+				//URLS where included
+				m = new MojoScraper(movieName, BoxOfficeMojoURL, true);
+				mojoGenres = m.getGenres();
+				System.out.println("mojo genres:" + mojoGenres);
+			}
+			
+			NumbersScraper n;
+			String numbersGenres;
+			if(TheNumbersURL == null) {
+				numbersGenres = "";
+			} else {
+				// theNumbers has URL
+				n = new NumbersScraper(movieName,TheNumbersURL, false);
+			}
+			
+			String subFinalString = movieName + "~" + imdbGenres + "~" + mojoGenres + "~" + tomatoGenres;
+			
+			
+			finalString += subFinalString + "\n";
 			
 		} catch (Exception e) {
 			e.printStackTrace();

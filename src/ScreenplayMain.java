@@ -155,7 +155,7 @@ public class ScreenplayMain {
 		    if(choice == 9) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
 		    
 		    if(choice == 10) titleString = "Movie Title~Country~USA";
-		    if(choice == 11) titleString = "Movie Title~MojoGenre~RottenTomatosGenre~TheNumbersGenre";
+		    if(choice == 11) titleString = "Movie Title~imdbGenre~MojoGenre~RottenTomatosGenre~TheNumbersGenre";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -461,6 +461,8 @@ public class ScreenplayMain {
 				
 				else if (choice == 11){ 
 					System.out.println("Starting code for choice 11");
+					
+					
 					for (String key : urls.keySet()) {
 						System.out.println("working on: " + key);
 						//working with urls
@@ -501,6 +503,7 @@ public class ScreenplayMain {
 						//if(index == 5) break;
 						//System.out.print("\n----------------------------------------\n");
 					} 
+					
 					for(String key : screenPlays.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
@@ -511,7 +514,7 @@ public class ScreenplayMain {
 					    	}
 						}
 						DataScraper sp = new DataScraper();
-						sp.MovieCountryMarch14Report(key,null, screenPlays.get(key));
+						sp.doGenresFromAllSources(key,null, null, null, null, screenPlays.get(key));
 						String finalSentence = sp.getFinal();
 						
 						if(finalSentence != null) {

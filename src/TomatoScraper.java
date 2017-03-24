@@ -39,6 +39,7 @@ public class TomatoScraper {
 
 		userAgent = new UserAgent();
 		try {
+			System.out.println("tomatoURL:" + tomatoURL);
 			userAgent.visit(tomatoURL);
 		} catch (ResponseException e) {
 			// TODO Auto-generated catch block
