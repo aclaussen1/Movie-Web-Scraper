@@ -561,14 +561,20 @@ public class DataScraper {
 			}
 			System.out.println("tomatoYear: " + tomatoYear);
 			
-			NumbersScraper ns = new NumbersScraper(movieName, writers);
+			NumbersScraper n;
 			String numbersYear = "";
-			try {
-				ns.numbersSearch();
-				numbersYear =  ns.getYear();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
+				try {
+					n = new NumbersScraper(movieName, writers);
+					if(n.numbersSearch()) {
+						numbersYear = n.getYear();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					numbersYear= "";
+				}
+				System.out.println("numbersYear: " + numbersYear);
+			
 			
 			
 			if(movieName.length() > 5 && movieName.toLowerCase().substring(movieName.length() - 5).contains(", the")) {
@@ -1058,15 +1064,25 @@ public class DataScraper {
 			}
 			
 			NumbersScraper n;
-			String numbersGenres;
+			String numbersGenres = "";
 			if(TheNumbersURL == null) {
-				numbersGenres = "";
+				try {
+					n = new NumbersScraper(movieName, writers);
+					if(n.numbersSearch()) {
+						numbersGenres = n.getGenres();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					numbersGenres= "";
+				}
 			} else {
 				// theNumbers has URL
 				n = new NumbersScraper(movieName,TheNumbersURL, false);
+				numbersGenres = n.getGenres();
+				System.out.println("numbers genres:" + numbersGenres);
 			}
 			
-			String subFinalString = movieName + "~" + imdbGenres + "~" + mojoGenres + "~" + tomatoGenres;
+			String subFinalString = movieName + "~" + imdbGenres + "~" + mojoGenres + "~" + tomatoGenres + "~" + numbersGenres;
 			
 			
 			finalString += subFinalString + "\n";

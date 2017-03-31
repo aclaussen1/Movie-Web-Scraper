@@ -126,7 +126,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources\n12 = test for numbers(doesn't generate report)");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)");
 		    int choice = Integer.parseInt(name);
 		    
 
@@ -480,7 +480,7 @@ public class ScreenplayMain {
 				else if (choice == 11){ 
 					System.out.println("Starting code for choice 11");
 					
-					
+					/*
 					for (String key : urls.keySet()) {
 						System.out.println("working on: " + key);
 						//working with urls
@@ -522,7 +522,10 @@ public class ScreenplayMain {
 						//System.out.print("\n----------------------------------------\n");
 					} 
 					
+					*/
+					
 					for(String key : screenPlays.keySet()) {
+						System.out.println("working on: " + key);
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 						

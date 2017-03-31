@@ -12,6 +12,20 @@ public class NumbersScraper {
 	boolean movieFound = false;
 	String movieWriters;
 	
+	public static boolean containsIgnoreCase(String str, String searchStr)     {
+	    if(str == null || searchStr == null) return false;
+
+	    final int length = searchStr.length();
+	    if (length == 0)
+	        return true;
+
+	    for (int i = str.length() - length; i >= 0; i--) {
+	        if (str.regionMatches(true, i, searchStr, 0, length))
+	            return true;
+	    }
+	    return false;
+	}
+	
 	public NumbersScraper(String movieName, String writers) {
 		nameOfMovie = movieName;
 		  userAgent = new UserAgent();
@@ -31,14 +45,16 @@ public class NumbersScraper {
 	}
 	
 	public boolean numbersSearch() {
+		System.out.println("in numbersSearch(), the name of the movie is:" + nameOfMovie);
 		try{
-		 if(nameOfMovie.contains(", The")) {
-			  nameOfMovie = nameOfMovie.replace(", The",  "");
-			  nameOfMovie = "The " + nameOfMovie;
+		 if(nameOfMovie.contains(", the")) {
+			 	System.out.println("in numbers scraper, the movieTitle contains ,the");
+			  nameOfMovie = nameOfMovie.replace(", the",  "");
+			  nameOfMovie = "the " + nameOfMovie;
 		  }
-		  if(nameOfMovie.contains(", A")) {
-			  nameOfMovie = nameOfMovie.replace(", A", "");
-			  nameOfMovie = "A " + nameOfMovie;
+		  if(nameOfMovie.contains(", a")) {
+			  nameOfMovie = nameOfMovie.replace(", a", "");
+			  nameOfMovie = "a " + nameOfMovie;
 		  } if(nameOfMovie.contains(",")) {
 			  nameOfMovie = nameOfMovie.replace(",", "");
 		  } if(nameOfMovie.contains(":")) {
@@ -46,7 +62,7 @@ public class NumbersScraper {
 		  }
 		  
 			userAgent.visit("http://www.the-numbers.com/search?searchterm=" + nameOfMovie.replace(" ", "+"));
-			
+			System.out.println("user agent in numbersscraper is vising: " + "http://www.the-numbers.com/search?searchterm=" + nameOfMovie.replace(" ", "+") );
 			
 			/*
 			 * There are two <table> sections on theNumbers search result pages. The purpsoe of this code block is to get to the one that we care about.
@@ -70,10 +86,15 @@ public class NumbersScraper {
 			Elements potentialMovieLinks = movieSection.findEvery("<a>");
 			for (Element e: potentialMovieLinks) {
 				try {
-					System.out.println(e.getAt("href"));
-					if(e.getAt("href").contains("movie")) {
+					System.out.println("1.in Numbers Scraper, potential movie url:" +e.getAt("href"));
+					System.out.println("2. In numbers scraper, e.getText(): " + e.getText());
+					//to deal with movies with ",the" at the end
+					System.out.println("3. In numbers scraper nameOfMovie.substring(0, nameOfMovie.length()-3)" + nameOfMovie.substring(0, nameOfMovie.length()-3));
+					if(containsIgnoreCase(e.getText(), nameOfMovie) || containsIgnoreCase(e.getText(), nameOfMovie.substring(0, nameOfMovie.length()-3))) {
 						userAgent.visit(e.getAt("href"));
 						movieFound = true;
+						System.out.println("movie was found");
+						return true;
 					}
 				} catch (NotFound e1) {
 					// TODO Auto-generated catch block
