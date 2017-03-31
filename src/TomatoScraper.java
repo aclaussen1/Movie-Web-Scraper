@@ -57,7 +57,7 @@ public class TomatoScraper {
 				  movieFound=true;
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("Marley & Me")) {
-				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  userAgent.visit("https://www.rottentomatoes.com/m/marley_and_me/");
 				  movieFound=true;
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
@@ -499,6 +499,206 @@ public class TomatoScraper {
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
 				  userAgent.visit("https://www.rottentomatoes.com/m/frankenweenie_2012");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("marley & me")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("alien vs. predator")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/alien_vs_predator/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {
+				  userAgent.visit("//www.rottentomatoes.com/m/marley_and_me/");
 				  movieFound=true;
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {

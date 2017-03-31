@@ -47,6 +47,24 @@ public class NumbersScraper {
 	public boolean numbersSearch() {
 		System.out.println("in numbersSearch(), the name of the movie is:" + nameOfMovie);
 		try{
+			if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/1197696_fantastic_mr_fox");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("Marley & Me")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Marley-and-Me#tab=summary");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  }
 		 if(nameOfMovie.contains(", the")) {
 			 	System.out.println("in numbers scraper, the movieTitle contains ,the");
 			  nameOfMovie = nameOfMovie.replace(", the",  "");

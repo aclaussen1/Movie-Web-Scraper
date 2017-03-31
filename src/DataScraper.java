@@ -816,12 +816,12 @@ public class DataScraper {
 	
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
 		
-		
+		/*
 		if (!containsIgnoreCase(movieName,"Horse Whisperer")  ) {
 			finalString = "";
 			return;
 		}
-		
+		*/
 		
 		try {
 			
@@ -1094,13 +1094,699 @@ public class DataScraper {
 	
 	public void doDirectorPower(String movieName, String writers) {
 		
+		ArrayList<String> al = new ArrayList<String>();
 		
-		if (!(movieName.contains("Batman and Robin")  )) {
-			finalString = "";
+		/*
+		al.add("Conspiracy Theory");
+
+		al.add("Spiderman, Amazing");
+
+		al.add("Hellraiser 3: Hell on Earth");
+
+		al.add("Transformers: The Movie");
+
+		al.add("maltese falcon the");
+
+		al.add("ford fairlane");
+
+		al.add("The Smurfs 2");
+
+		al.add("thief");
+
+		al.add("mighty joe young");
+
+		al.add("Inferno");
+
+		al.add("Mummy,  The");
+
+		al.add("Twilight New Moon");
+		
+		
+		al.add("V for Vendetta");
+
+				al.add("thin red line (1998)");
+
+				al.add("my own private idaho");
+
+				al.add("Trumbo");
+
+				al.add("Get On Up");
+
+				al.add("my name is bruce");
+
+				al.add("Annie");
+
+				al.add("Batman and Robin");
+
+				al.add("Hudson Hawk");
+
+				al.add("Alien");
+
+				al.add("Royal tenenbaums, the");
+
+				al.add("Star Wars: Return of the Jedi");
+
+				al.add("nightmare on elm street3 Dream Warriors");
+
+				al.add("Family Man, The");
+
+				al.add("Mission Impossible");
+
+				al.add("lost boys");
+
+				al.add("Beloved");
+
+				al.add("quills");
+
+				al.add("New Nightmare");
+
+				al.add("muppets, the");
+
+				al.add("We Need to Talk About Kevin");
+
+				al.add("Way Way Back");
+
+				al.add("Les Miserables");
+
+				al.add("mother and child");
+
+				al.add("Island of dr moreau, the");
+
+				al.add("Batman Forever");
+
+				al.add("no country for old men");
+
+				al.add("Olympus Has Fallen");
+
+				al.add("xXx");
+
+				al.add("Leap Year");
+
+				al.add("Searchers, The");
+
+				al.add("Star Wars Revenge of the Jedi");
+
+				al.add("Pawn Sacrifice");
+
+				al.add("Atonement");
+
+				al.add("Somewhere");
+
+				al.add("pans labyrinth");
+
+				al.add("Spotlight");
+
+				al.add("Indiana Jones and the Raiders of the Lost Ark");
+
+				al.add("unborn, the");
+
+				al.add("Producer, The");
+
+				al.add("flightplan");
+
+				al.add("shining");
+
+				al.add("Sleepy Hollow");
+
+				al.add("demolition man");
+
+				al.add("Fabulous Baker Boys, The");
+
+				al.add("Kundun");
+
+				/*
+		al.add("Angel Eyes");
+
+		al.add("Savages");
+
+		al.add("Wedding Date");
+
+		al.add("world war z");
+
+		al.add("Children of Men");
+
+		al.add("S1m0ne");
+
+		al.add("15 Minutes");
+
+		al.add("Outbreak");
+
+		al.add("Life As A House");
+
+		al.add("1492: Conquest of Paradise");
+
+		al.add("elizabeth the golden age");
+
+		al.add("Bridget Jones's Baby");
+
+		al.add("The Tourist");
+
+		al.add("last temptation of christ 1988");
+
+		al.add("World is not Enough, The");
+
+		al.add("superman Man of steel");
+
+		al.add("halloween h20");
+
+		al.add("Leviathan");
+
+		al.add("memphis belle");
+
+		al.add("superman 3");
+
+		al.add("superman 2");
+
+		al.add("Bottle Rocket");
+
+		al.add("million dollar baby");
+
+		al.add("Hellraiser 2 Hellbound");
+
+		al.add("X-men");
+
+		al.add("hurt locker");
+
+		al.add("I am Sam");
+
+		al.add("This is 40");
+
+		al.add("Space Cowboys");
+
+		al.add("Matchstick Men");
+
+		al.add("Croupier");
+
+		al.add("Trainwreck");
+
+		al.add("Spartan");
+
+		al.add("Lara Croft Tomb Raider");
+
+		al.add("Lord of the Rings: Fellowship of the Ring, The");
+
+		al.add("Raging Bull");
+
+		al.add("Blade II");
+
+		al.add("Rock, The");
+
+		al.add("safety not guaranteed");
+
+		al.add("Wag the Dog");
+
+		al.add("MY BIG FAT GREEK WEDDING 2");
+
+		al.add("Danish Girl, the");
+
+		al.add("prestige the");
+
+		al.add("Toy Story");
+
+		al.add("Terminator 2: Judgement Day");
+		
+		al.add("jaws3");
+
+		al.add("Jeepers Creepers 2");
+
+		al.add("Before Sunrise");
+
+		al.add("Revenant, The");
+
+		al.add("nothing but a man");
+
+		al.add("Catwoman");
+
+		al.add("star trek 1978");
+
+		al.add("Sugar and Spice");
+
+		al.add("Letters to Juliet");
+
+		al.add("Malcolm X");
+
+		al.add("Frozen_disney");
+
+		al.add("Max Payne");
+
+		al.add("Boondock Saints II: All Saints Day");
+
+		al.add("hustler, the");
+
+		al.add("Straight Outta Compton");
+
+		al.add("zodiac");
+
+		al.add("Heist");
+
+		al.add("Freddy's Dead: The Final Nightmare");
+
+		al.add("lone survivor");
+
+		al.add("Hills have eyes, the 1976");
+
+		al.add("St. Vincent");
+
+		al.add("vicky cristina barcelona");
+
+		al.add("Ring");
+
+		al.add("rapture");
+
+		al.add("Pitch Black");
+
+		al.add("Evil Dead II: Dead by Dawn");
+
+		al.add("Blade Runner");
+
+		al.add("Sin Nombre");
+
+		al.add("Looney Tunes Back in action");
+
+		al.add("One Chance");
+
+		al.add("sounder");
+
+		al.add("Bound");
+
+		al.add("Love and Basketball");
+
+		al.add("Beetlejuice");
+
+		al.add("never let me go");
+
+		al.add("Face/ Off");
+
+		al.add("Batman Begins");
+
+		al.add("hate crime");
+
+		al.add("where the wild things are");
+
+		al.add("maria full of grace");
+
+		al.add("Truth");
+
+		al.add("little monsters");
+
+		al.add("I Smile Back");
+
+		al.add("town");
+
+		al.add("spiderman the original
+
+		al.add("Goosebumps
+
+		al.add("Judge Dredd
+
+		al.add("Kids
+
+		al.add("Three Men and a Baby
+
+		al.add("Hotel Transylvania 2
+
+		Hateful eight, the
+
+		Cell, The
+
+		labor day
+
+		runaways, the
+
+		Mississippi Grind
+
+		midnight run 1988
+
+		millers crossing
+
+		Time Machine, The
+
+		Crow, The
+
+		Point Break
+
+		Fracture
+
+		Crouching Tiger, Hidden Dragon
+
+		MASH
+
+		iron giant
+
+		Armored
+
+		SLACKERS
+
+		Book of Shadows: Blair Witch 2
+
+		Wild At Heart
+
+		i hope they serve beer in hell
+
+		single man, a
+
+		MOVIE_TITLE
+
+		Battle of Shaker Heights, The
+
+		untraceable
+
+		Its Kind of a Funny Story
+
+		Take Shelter
+
+		something borrowed
+
+		Kung Fu Panda
+
+		Gone in 60 Seconds
+
+		House Bunny, the
+
+		Godfather Part II
+
+		Infinitely Polar Bear
+
+		You Can Count On Me
+
+		Signs
+
+		Her
+
+		Mumford
+
+		King Kong
+
+		Whiplash
+
+		expendables
+
+		Star Trek: First Contact
+
+		punch drunk love
+
+		no one lives 2011
+
+		Snow Falling On Cedars
+
+		Relic, The
+
+		Moon
+
+		stay (2005)
+
+		young adult
+
+		Man on the Moon
+
+		Visitor, The
+
+		Snatch
+
+		Ed Wood
+
+		Thirteen Days
+
+		Assignment, The
+
+		Promised Land
+
+		Apocalypse Now Redux
+
+		fisher king
+
+		Something's Gotta Give
+
+		Night at the roxbury
+
+		hardware
+
+		Airplane II: The Sequel 
+
+		Last Tango in Paris
+
+		Star Trek: Nemesis
+
+		true crime
+
+		Star Wars: Attack of the Clones
+
+		Margin Call
+
+		sex tape
+
+		house on haunted hill
+
+		Kramer vs Kramer
+
+		Annabelle
+
+		Frozen
+
+		Jason vs Freddy
+
+		An American Werewolf in Paris
+
+		Breakfast Club, The
+
+		Jennifer Eight
+
+		Star Wars: The Force Awakens
+
+		Informers, the
+
+		Next
+
+		Blue Velvet
+
+		Life
+
+		Machine Gun Preacher
+
+		Imitation Game The
+
+		Time Travelers Wife
+
+		Knocked Up
+
+		Possession1
+
+		Ricki and the Flash
+
+		monsters ball
+
+		Ladykillers, The
+
+		Apartment, The
+
+		Twelve Monkeys
+
+		Spider-man
+
+		Soldier
+
+		Gothika
+
+		joe vs volcano
+
+		Officer and a Gentleman, An
+
+		Star Trek
+
+		Matrix Reloaded, The
+
+		sicario
+
+		idiocracy
+
+		predators
+
+		Warrior
+
+		Avengers, The (2012)
+
+		rabbit hole
+
+		Blood Work
+
+		Queen of the Damned
+
+		Thunderheart
+
+		Mimic
+
+		Detroit Rock City
+
+		Lord of the Rings: Return of the King
+
+		Independence  Day
+
+		Mystery Men
+
+		Batman
+
+		Body of Evidence
+
+		Air Force One
+
+		Middle of Nowhere
+
+		Jay and Silent Bob Strike Back
+
+		Secret Life of Walter MItty,The
+
+		nightmare on elm street2 Freddys revenge
+
+		Dead Poets Society
+
+		Scarface
+
+		Cradle 2 the Grave
+
+		Bull Durham
+
+		incredible hulk the
+
+		Reservoir Dogs
+
+		Starman
+
+		Antz
+
+		Flintstones, The
+
+		I AM LEGEND
+
+		halloween
+
+		Someone To Watch Over Me
+
+		straw dogs
+
+		Hannibal
+
+		domino
+
+		Terminator Salvation
+
+		Mud
+
+		G.I. Jane
+
+		Godfather
+
+		LITTLE MISS SUNSHINE
+
+		hope and glory
+
+		New Moon
+
+		Mystic River
+
+		Life of Pi
+
+		Alone in the Dark
+
+		Raising Arizona
+
+		Hangover, The
+
+		Se7en
+
+		Halloween: Resurrection
+
+		Basquiat
+
+		Rush Hour
+
+		Unforgiven
+
+		Harold and Kumar Go to White Castle
+
+		Liar Liar
+
+		let me in
+
+		Three Kings (Spoils of War)
+
+		Saving Private Ryan
+
+		Basic
+
+		Fear of clowns
+
+		Lorax
+
+		Dances with Wolves
+
+		Still Alice
+
+		Ferris Bueller's Day Off
+
+		Moneyball
+
+		hero
+
+		L.A. Confidential
+
+		Star Wars: A New Hope
+
+		Bean
+
+		network
+
+		Shrek the Third
+
+		Maverick
+
+		Ocean's Twelve
+
+		king of comedy
+
+		Horse Whisperer, The
+
+		Slither
+
+		Citizen Kane
+
+		Interview, the
+
+		Broadcast News
+
+		Book of Eli, The
+
+		Witches of Eastwick
+
+		smoke
+
+		Ted
+
+		Wedding Ringer
+
+		Ghostbusters 2
+
+		Casino
+
+		Star Wars: The Empire Strikes Back
+
+		Bamboozled
+
+		Slumdog Millionaire
+
+		boolean skip = true;
+		
+		for (String s: al) {
+			if (movieName.equalsIgnoreCase(s) ) {
+				skip =false;
+				
+			}
+		}
+		
+		if (skip) {
 			return;
 		}
 		
-		
+		*/
 		//movieName = movieName.toLowerCase();
 		
 		try {

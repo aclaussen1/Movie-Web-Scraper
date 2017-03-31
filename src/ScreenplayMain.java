@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	//public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
+	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//
-	public static String path = "C:\\Users\\Alex\\Downloads\\";
+	//public static String path = "C:\\Users\\Alex\\Downloads\\";
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
@@ -57,6 +57,8 @@ public class ScreenplayMain {
 		String[] movieStrings = new String[1058];
 		
 		HashMap<String, String[]> urls = null;
+		//only used in option 13. http://stackoverflow.com/questions/17606839/creating-a-set-of-arrays-in-java
+		Set<List<String>> csv = null;
 		
 		//screenPlays = mg.getMovies(); //**UNCOMMENT THIS WHEN THE FILE IS MOVIE NAMES
 		boolean usingUrls = false;
@@ -126,8 +128,23 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)\n13 = build on existing StarPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n14 = build on existing DirectorPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)");
 		    int choice = Integer.parseInt(name);
+		    
+		    if (choice == 13 || choice == 14) {
+		    		System.out.println("provide csv file for director power to expand on. Remove all incomplete movies in csv.");
+			        JFileChooser fileChooser = new JFileChooser();
+			        int returnValue = fileChooser.showOpenDialog(new JFrame());
+			        if (returnValue == JFileChooser.APPROVE_OPTION) {
+			          File selectedFile = fileChooser.getSelectedFile();
+			          try {
+						String directorPowerCSVFile = selectedFile.getCanonicalPath();
+						csv = mg.getUrlsforDirectorPowerCSV(directorPowerCSVFile);
+			          } catch (IOException e) {
+						e.printStackTrace();
+			          }
+			        }
+		        }
 		    
 
 			//UNCOMMENT THE NEXT LINE TO SET THE HEADER ROW FOR PRIMARY 3 SCRAPING 
@@ -156,6 +173,8 @@ public class ScreenplayMain {
 		    
 		    if(choice == 10) titleString = "Movie Title~Country~USA";
 		    if(choice == 11) titleString = "Movie Title~imdbGenre~MojoGenre~RottenTomatosGenre~TheNumbersGenre";
+		    if(choice == 14) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
+		    if(choice == 13) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -320,6 +339,7 @@ public class ScreenplayMain {
 						
 						index++;
 					}
+					
 				}
 				else if (choice==9) {
 					
@@ -480,7 +500,7 @@ public class ScreenplayMain {
 				else if (choice == 11){ 
 					System.out.println("Starting code for choice 11");
 					
-					/*
+					
 					for (String key : urls.keySet()) {
 						System.out.println("working on: " + key);
 						//working with urls
@@ -522,17 +542,14 @@ public class ScreenplayMain {
 						//System.out.print("\n----------------------------------------\n");
 					} 
 					
-					*/
+					
 					
 					for(String key : screenPlays.keySet()) {
 						System.out.println("working on: " + key);
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 						
-							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
-								System.out.println(key + " has already been done. Skipping to next movie.");
-					    		continue;
-					    	}
+						
 						
 						DataScraper sp = new DataScraper();
 						sp.doGenresFromAllSources(key,null, null, null, null, screenPlays.get(key));
@@ -559,6 +576,205 @@ public class ScreenplayMain {
 						writer.close();
 						writer2.write(key + "\n");
 						writer2.close();
+					}
+					
+					
+				}
+				else if (choice == 13){ 
+					//build on existing imperfect star power
+					System.out.println("Starting code for choice 13");
+					
+					for (List rowList : csv) {
+						String[] row = (String[]) rowList.toArray();
+						if (!row[0].equalsIgnoreCase("") ) {
+							if(row[1].equalsIgnoreCase("") || row[0].equalsIgnoreCase("MOVIE_TITLE")) {
+								//this is to address the case where in the directorPower report, the rows with just the movie title get deleted.
+								
+							}
+							else {
+								writer = new BufferedWriter(new FileWriter(logFile, true));
+								writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+								
+								String finalSentence = row[0] + "~" + row[1] + "~" + row[2] + "~" + row[3]+ "~" + row[4]+ "~" + row[5]+ "~" + row[6]+ "~" + row[7]+ "~" + row[8] + "\n";
+								writer.write(finalSentence);
+								writer.close();
+								writer2.write(row[0] + "\n");
+								writer2.close();
+							}
+						}
+					}
+					
+					
+					for (String key : urls.keySet()) {
+						System.out.println("working on movie: "+ key);
+						
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						
+						DataScraper sp = new DataScraper();
+						sp.doStarPower(key, urls.get(key)[2],true);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+
+					}
+					
+					//now deal with non-URLs
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+					
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"")) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						
+						
+						System.out.println("Working on:" + key);
+						DataScraper sp = new DataScraper();
+						sp.doStarPower(key, screenPlays.get(key),false);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							finalSentence = finalSentence.replaceAll("$", "");
+						}
+						else finalSentence = "\n" + key + "\n";
+			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+						index++;
+					}
+					
+					
+				}else if (choice == 14){ 
+					//build on existing imperfect director power
+					System.out.println("Starting code for choice 14");
+					
+					for (List rowList : csv) {
+						String[] row = (String[]) rowList.toArray();
+						if (!row[0].equalsIgnoreCase("") ) {
+							if(row[1].equalsIgnoreCase("") || row[0].equalsIgnoreCase("MOVIE_TITLE")) {
+								//this is to address the case where in the directorPower report, the rows with just the movie title get deleted.
+								
+							}
+							else {
+								writer = new BufferedWriter(new FileWriter(logFile, true));
+								writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+								
+								String finalSentence = row[0] + "~" + row[1] + "~" + row[2] + "~" + row[3]+ "~" + row[4]+ "~" + row[5]+ "~" + row[6]+ "~" + row[7]+ "~" + row[8] + "\n";
+								writer.write(finalSentence);
+								writer.close();
+								writer2.write(row[0] + "\n");
+								writer2.close();
+							}
+						}
+					}
+					
+					
+					for (String key : urls.keySet()) {
+						System.out.println("working on movie: "+ key);
+						
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						
+						DataScraper sp = new DataScraper();
+						sp.doDirectorPower(key, urls.get(key)[2]);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						//finalSentence = finalSentence + "\n";
+						
+			//			if(finalSentence == null) {
+			//
+			//			}
+			//			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+
+					}
+					
+					//now deal with non-URLs
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						
+						
+							System.out.println("movie name withquotation marks:" + "\"" + key + "\"" );
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
+								System.out.println(key + " has already been done. Skipping to next movie.");
+					    		continue;
+					    	}
+						
+						
+						System.out.println("Working on:" + key);
+						DataScraper sp = new DataScraper();
+						sp.doDirectorPower(key, screenPlays.get(key));
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							finalSentence = finalSentence.replaceAll("$", "");
+						}
+						else finalSentence = "\n" + key + "\n";
+			
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+						index++;
 					}
 					
 					

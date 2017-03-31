@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -119,6 +118,7 @@ public class MovielistGenerator {
                 urlArray[6] = urls[7];
                 System.out.println("urlArray[5]" + urlArray[5]);
                 
+                
                 mainMap.put(urls[0], urlArray);
                 
             }
@@ -140,4 +140,61 @@ public class MovielistGenerator {
         return mainMap;
 	}
 	
+
+
+public Set<List<String>> getUrlsforDirectorPowerCSV(String csvFile) {
+
+
+    BufferedReader br = null;
+    String line = "";
+    String cvsSplitBy = ",";
+    
+    Set<List<String>> csv = new HashSet<List<String>>();
+
+    
+    int mainMapIndex = 0;
+    try {
+
+        br = new BufferedReader(new FileReader(csvFile));
+        while ((line = br.readLine()) != null) {
+        	
+        	 //regex solution to why urls aren't working. see http://stackoverflow.com/questions/1757065/java-splitting-a-comma-separated-string-but-ignoring-commas-in-quotes. Don't really understand the regex but it should work
+             String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+             String[] urls = new String[11];
+             int i = 0;
+             for(String t : tokens) {
+            	 System.out.println("t:" + t + " i:" + i);
+                 urls[i] = t;
+                 i++;
+                 
+             }
+             System.out.println("------------------------------------------------------------------------");
+        	
+            // use comma as separator
+            //String[] urls = line.split(cvsSplitBy);
+            
+           
+            
+            
+            csv.add(Arrays.asList(urls));
+            
+        }
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if (br != null) {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    return csv;
+}
+
 }
