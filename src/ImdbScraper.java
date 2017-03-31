@@ -887,23 +887,23 @@ public class ImdbScraper {
 			  }else if (nameOfMovie.equalsIgnoreCase("cobb")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("carrie")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0074285/?ref_=nv_sr_4");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("the getaway")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0068638/?ref_=nv_sr_2");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("metro")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0119664/?ref_=nv_sr_2");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("arthur")) {
+				  userAgent.visit("http://www.imdb.com/title/tt1334512/");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("blade")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0120611/?ref_=nv_sr_4");
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
-				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
+			  }else if (nameOfMovie.equalsIgnoreCase("star trek")) {
+				  userAgent.visit("http://www.imdb.com/title/tt0796366/?ref_=nv_sr_8");
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("frankenweenie")) {
 				  userAgent.visit("http://www.imdb.com/title/tt1142977/?ref_=nv_sr_1");
