@@ -811,7 +811,7 @@ public class DataScraper {
 	public void doStarPower(String movieName, String writers, boolean urlActive) {
 		
 		
-		if (!containsIgnoreCase(movieName,"top gun")  ) {
+		if (!containsIgnoreCase(movieName,"Horse Whisperer")  ) {
 			finalString = "";
 			return;
 		}
@@ -954,6 +954,22 @@ public class DataScraper {
 							if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Dumb & Dumber")) {
 								found = true;
 							}
+						} else if (imdbTitle.equalsIgnoreCase("Batman &amp; Robin")) {
+							if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Batman & Robin")) {
+								found = true;
+							}
+						} else if (imdbTitle.equalsIgnoreCase("Sugar &amp; Spice")) {
+							if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Sugar & Spice")) {
+								found = true;
+							}
+						} else if (imdbTitle.equalsIgnoreCase("Love &amp; Basketball")) {
+							if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Love & Basketball")) {
+								found = true;
+							}
+						} else if (imdbTitle.equalsIgnoreCase("Harold &amp; Kumar Go to White Castle")) {
+							if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Harold & Kumar Go to White Castle")) {
+								found = true;
+							}
 						}
 					}
 				}
@@ -1063,7 +1079,7 @@ public class DataScraper {
 	public void doDirectorPower(String movieName, String writers) {
 		
 		
-		if (!(movieName.contains("Matrix")  )) {
+		if (!(movieName.contains("Batman and Robin")  )) {
 			finalString = "";
 			return;
 		}
@@ -1090,6 +1106,8 @@ public class DataScraper {
 				System.out.println("imdb search returned true.");
 			}
 			
+			
+			String imdbMovie = s.getIMDBTitle();
 			if(movieName.length() > 5 && movieName.toLowerCase().substring(movieName.length() - 5).contains(", the")) {
 				movieName = movieName.toLowerCase().replace(", the", "");
 				movieName = "the " + movieName;
@@ -1254,6 +1272,26 @@ public class DataScraper {
 							if(movieDivider.findFirst("<a>").getText().toLowerCase().equalsIgnoreCase(imdbMovieName)) {
 								System.out.println(movieDivider.findFirst("<a>").getText());
 								currentMovieFound = true;
+							} else if (imdbMovieName.equalsIgnoreCase("Dumb &amp; Dumber")) {
+								if(movieDivider.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Dumb & Dumber")) {
+									currentMovieFound = true;
+								}
+							} else if (imdbMovieName.equalsIgnoreCase("Batman &amp; Robin")) {
+								if(movieDivider.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Batman & Robin")) {
+									currentMovieFound = true;
+								}
+							} else if (imdbMovieName.equalsIgnoreCase("Sugar &amp; Spice")) {
+								if(movieDivider.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Sugar & Spice")) {
+									currentMovieFound = true;
+								}
+							} else if (imdbMovieName.equalsIgnoreCase("Love &amp; Basketball")) {
+								if(movieDivider.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Love & Basketball")) {
+									currentMovieFound = true;
+								}
+							} else if (imdbMovieName.equalsIgnoreCase("Harold &amp; Kumar Go to White Castle")) {
+								if(movieDivider.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Harold & Kumar Go to White Castle")) {
+									currentMovieFound = true;
+								}
 							}
 						}
 					}
