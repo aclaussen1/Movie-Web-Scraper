@@ -502,7 +502,7 @@ public class DataScraper {
 
 			if(imdb.imdbSearch() == false) {
 				System.out.println("imdbSearch returned false. it failed");
-				//finalString = "\n";
+				imdbYear = "MOVIE NOT FOUND";
 				
 			}
 			else {
@@ -566,9 +566,8 @@ public class DataScraper {
 			
 				try {
 					n = new NumbersScraper(movieName, writers);
-					if(n.numbersSearch()) {
-						numbersYear = n.getYear();
-					}
+					numbersYear = n.getYear();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 					numbersYear= "";

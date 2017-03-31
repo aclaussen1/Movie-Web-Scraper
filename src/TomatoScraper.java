@@ -509,8 +509,8 @@ public class TomatoScraper {
 				  userAgent.visit("https://www.rottentomatoes.com/m/marley_and_me/");
 				  movieFound=true;
 				  return true;
-			  }else if (nameOfMovie.equalsIgnoreCase("alien vs. predator")) {
-				  userAgent.visit("https://www.rottentomatoes.com/m/alien_vs_predator/");
+			  }else if (nameOfMovie.equalsIgnoreCase("the crow salvation")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/crow_salvation/");
 				  movieFound=true;
 				  return true;
 			  }else if (nameOfMovie.equalsIgnoreCase("tristan and isolde")) {

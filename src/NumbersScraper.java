@@ -47,12 +47,144 @@ public class NumbersScraper {
 	public boolean numbersSearch() {
 		System.out.println("in numbersSearch(), the name of the movie is:" + nameOfMovie);
 		try{
-			if (nameOfMovie.equalsIgnoreCase("Fantastic Mr Fox")) {
-				  userAgent.visit("https://www.rottentomatoes.com/m/1197696_fantastic_mr_fox");
-				  movieFound=true;
-				  return true;
+			if (nameOfMovie.equalsIgnoreCase("nashville")) {
+				  				  movieFound=false;
+				  return false;
 			  } else if (nameOfMovie.equalsIgnoreCase("Marley & Me")) {
 				  userAgent.visit("http://www.the-numbers.com/movie/Marley-and-Me#tab=summary");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("lost horizon")) {
+				 
+				  
+				  movieFound=false;
+				  return false;
+			  }else if (nameOfMovie.equalsIgnoreCase("all the king's men")) {
+				  return false;
+			  } else if (nameOfMovie.equalsIgnoreCase("fantastic mr fox")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Fantastic-Mr-Fox-The#tab=summary");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/9#tab=summary");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("little athens")) {
+				  movieFound=false;
+				  return false;
+			  } else if (nameOfMovie.equalsIgnoreCase("pokemon: mewtwo returns")) {
+				  movieFound=false;
+				  return false;
+			  }else if (nameOfMovie.equalsIgnoreCase("sweeney todd: the demon barber of fleet street")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Sweeney-Todd-The-Demon-Barber-of-Fleet-Street#tab=summary");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("my mother dreams the satan's disciples in new york")) {
+				  movieFound=false;
+				  return false;
+			  }else if (nameOfMovie.equalsIgnoreCase("cowboys & aliens")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Cowboys-and-Aliens#tab=summary");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("frankenstein")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Frankenstein-(1994)#tab=summary");
+				  movieFound=false;
+				  return false;
+			  }else if (nameOfMovie.equalsIgnoreCase("arctic blue")) {
+				  
+				  movieFound=false;
+				  return false;
+			  } else if (nameOfMovie.equalsIgnoreCase("blade: trinity")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Blade-Trinity#tab=summary");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("conan the barbarian")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Conan#tab=summary");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("ringu")) {
+				  movieFound=false;
+				  return false;
+			  }else if (nameOfMovie.equalsIgnoreCase("a dry white season")) {
+				  movieFound=false;
+				  return false;
+			  } else if (nameOfMovie.equalsIgnoreCase("death at a funeral")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Death-at-a-Funeral-(2010)#tab=summary");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("bodyguard")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/Bodyguard-The#tab=summary");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("august: osage county")) {
+				  userAgent.visit("http://www.the-numbers.com/movie/August-Osage-County#tab=summary");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
+				  movieFound=true;
+				  return true;
+			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
+				  userAgent.visit("https://www.rottentomatoes.com/search/?search=9");
+				  System.out.println("found the movie 9 on rotten tomato");
+				  movieFound=true;
+				  return true;
+			  }else if (nameOfMovie.equalsIgnoreCase("42")) {
+				  userAgent.visit("https://www.rottentomatoes.com/m/42_2013");
 				  movieFound=true;
 				  return true;
 			  } else if (nameOfMovie.equalsIgnoreCase("9")) {
