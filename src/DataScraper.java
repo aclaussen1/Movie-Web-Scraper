@@ -922,8 +922,8 @@ public class DataScraper {
 						//if(index > 10 ) break;
 						if(index >= 10 && USAcount >=10) break;
 						System.out.println("element.findFirst(\"a\").getAt(\"href\"): " + element.findFirst("a").getAt("href"));
-						ImdbScraper tempScraper = new ImdbScraper(movieName, element.findFirst("a").getAt("href"));
-						tempScraper.imdbSearch();
+						ImdbScraper tempScraper = new ImdbScraper(movieName, element.findFirst("a").getAt("href"),false);
+						//tempScraper.imdbSearch();
 						String actor = imdb.getStars().split(",")[i];
 						String gross = tempScraper.getGross();
 						String budget = tempScraper.getBudget();
@@ -945,10 +945,15 @@ public class DataScraper {
 						
 						index++;
 					} else {
+						System.out.println("comparing to imdbTitle:" + imdbTitle);
 						if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase(imdbTitle)) {
 							//System.out.println(starUrls.get(i));
-							//System.out.println("------------------------");
+							System.out.println("------------------------");
 							found = true;
+						} else if (imdbTitle.equalsIgnoreCase("Dumb &amp; Dumber")) {
+							if(element.findFirst("a").getText().toLowerCase().equalsIgnoreCase("Dumb & Dumber")) {
+								found = true;
+							}
 						}
 					}
 				}
@@ -1057,12 +1062,12 @@ public class DataScraper {
 	
 	public void doDirectorPower(String movieName, String writers) {
 		
-		/*
-		if (!(movieName.contains("Who Framed Roger Rabbit?")  )) {
+		
+		if (!(movieName.contains("Matrix")  )) {
 			finalString = "";
 			return;
 		}
-		*/
+		
 		
 		//movieName = movieName.toLowerCase();
 		

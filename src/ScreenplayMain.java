@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
+	//public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//
-	//public static String path = "C:\\Users\\Alex\\Downloads\\";
+	public static String path = "C:\\Users\\Alex\\Downloads\\";
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
@@ -235,7 +235,7 @@ public class ScreenplayMain {
 					
 					writer.write(finalSentence);
 					writer.close();
-					writer2.write(key);
+					writer2.write(key + "\n");
 					writer2.close();
 					
 					index++;
@@ -252,12 +252,12 @@ public class ScreenplayMain {
 						
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+						
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						DataScraper sp = new DataScraper();
 						sp.doDirectorPower(key, urls.get(key)[2]);
 						
@@ -283,7 +283,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 
 					}
@@ -292,12 +292,14 @@ public class ScreenplayMain {
 					for(String key : screenPlays.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+						
+						
+							System.out.println("movie name withquotation marks:" + "\"" + key + "\"" );
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						
 						System.out.println("Working on:" + key);
 						DataScraper sp = new DataScraper();
@@ -313,24 +315,28 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 						
 						index++;
 					}
 				}
 				else if (choice==9) {
+					
+					//star Power
+					
+					
 					for (String key : urls.keySet()) {
 						System.out.println("working on movie: "+ key);
 						
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+						
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						DataScraper sp = new DataScraper();
 						sp.doStarPower(key, urls.get(key)[2],true);
 						
@@ -365,12 +371,12 @@ public class ScreenplayMain {
 					for(String key : screenPlays.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+					
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"")) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						
 						System.out.println("Working on:" + key);
 						DataScraper sp = new DataScraper();
@@ -397,12 +403,12 @@ public class ScreenplayMain {
 					for (String key : urls.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+						
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						DataScraper sp = new DataScraper();
 						sp.MovieCountryMarch14Report(urls.get(key)[0],urls.get(key)[2], null);
 						String finalSentence = sp.getFinal();
@@ -426,7 +432,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 						//index++;
 						//if(index == 5) break;
@@ -435,12 +441,12 @@ public class ScreenplayMain {
 					for(String key : screenPlays.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+						
+							if ( parseFile(path + fileName + "tracker.txt", key)|| parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						DataScraper sp = new DataScraper();
 						sp.MovieCountryMarch14Report(key,null, screenPlays.get(key));
 						String finalSentence = sp.getFinal();
@@ -464,7 +470,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 					}
 					
@@ -480,12 +486,12 @@ public class ScreenplayMain {
 						//working with urls
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
+						
 							if ( parseFile(path + fileName + "tracker.txt", key) ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						DataScraper sp = new DataScraper();
 						sp.doGenresFromAllSources(urls.get(key)[0],urls.get(key)[2],urls.get(key)[3],urls.get(key)[4],urls.get(key)[6],null);
 						String finalSentence = sp.getFinal();
@@ -509,7 +515,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 						//index++;
 						//if(index == 5) break;
@@ -519,12 +525,12 @@ public class ScreenplayMain {
 					for(String key : screenPlays.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
-							if ( parseFile(path + fileName + "tracker.txt", key) ) {
+						
+							if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						DataScraper sp = new DataScraper();
 						sp.doGenresFromAllSources(key,null, null, null, null, screenPlays.get(key));
 						String finalSentence = sp.getFinal();
@@ -548,7 +554,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 					}
 					
@@ -561,12 +567,12 @@ public class ScreenplayMain {
 						
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
-						if(complementaryFileFound) {
+					
 							if ( parseFile(path + fileName + "tracker.txt", key) ) {
 								System.out.println(key + " has already been done. Skipping to next movie.");
 					    		continue;
 					    	}
-						}
+						
 						DataScraper sp = new DataScraper();
 						//System.out.println(key);
 						//System.out.println(key + " - WRITERS: " + screenPlays.get(key));
@@ -609,7 +615,7 @@ public class ScreenplayMain {
 						
 						writer.write(finalSentence);
 						writer.close();
-						writer2.write(key);
+						writer2.write(key + "\n");
 						writer2.close();
 						//index++;
 						//if(index == 5) break;
