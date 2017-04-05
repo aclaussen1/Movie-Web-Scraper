@@ -1091,7 +1091,7 @@ public class DataScraper {
 		}
 	}
 	
-	public void doDirectorPower(String movieName, String writers) {
+	public void doDirectorPower(String movieName, String writers, boolean usingURL) {
 		
 		ArrayList<String> al = new ArrayList<String>();
 		
@@ -1791,21 +1791,25 @@ public class DataScraper {
 		try {
 			
 			ImdbScraper s = null;
-			
+			if(!usingURL ) {
 			s = new ImdbScraper(movieName, writers);
-			
 			try {
 				boolean hi = s.imdbSearch();
 			} catch (Exception e) {
 				System.out.println("imdbSearch caused an exception");
 			}
-			
 			if(s.imdbSearch() == false) {
 				System.out.println("In DataScarper, s.imdbSearch() returned false.");
 				return;
 			} else {
 				System.out.println("imdb search returned true.");
 			}
+			} else {
+				s = new ImdbScraper(movieName, writers, false);
+			}
+			
+			
+			
 			
 			
 			String imdbMovie = s.getIMDBTitle();

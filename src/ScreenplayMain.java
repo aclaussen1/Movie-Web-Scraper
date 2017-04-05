@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
+	//public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//
-	//public static String path = "C:\\Users\\Alex\\Downloads\\";
+	public static String path = "C:\\Users\\Alex\\Downloads\\";
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
@@ -223,7 +223,7 @@ public class ScreenplayMain {
 					if(choice == 3) sp.doStarPower(key, screenPlays.get(key), false);
 					
 					//UNCOMMENT THE NEXT LINE TO ENABLE DIRECTOR-POWER WITHOUT URLS
-					if(choice == 4) sp.doDirectorPower(key, screenPlays.get(key));
+					if(choice == 4) sp.doDirectorPower(key, screenPlays.get(key), false);
 					
 					if(choice == 5) sp.doMovieTitlesAndYears(key, screenPlays.get(key), false);
 					
@@ -278,7 +278,7 @@ public class ScreenplayMain {
 					    	}
 						
 						DataScraper sp = new DataScraper();
-						sp.doDirectorPower(key, urls.get(key)[2]);
+						sp.doDirectorPower(key, urls.get(key)[2], true);
 						
 						String finalSentence = sp.getFinal();
 						
@@ -322,7 +322,7 @@ public class ScreenplayMain {
 						
 						System.out.println("Working on:" + key);
 						DataScraper sp = new DataScraper();
-						sp.doDirectorPower(key, screenPlays.get(key));
+						sp.doDirectorPower(key, screenPlays.get(key), false);
 						String finalSentence = sp.getFinal();
 						
 						if(finalSentence != null) {
@@ -715,7 +715,7 @@ public class ScreenplayMain {
 					    	}
 						
 						DataScraper sp = new DataScraper();
-						sp.doDirectorPower(key, urls.get(key)[2]);
+						sp.doDirectorPower(key, urls.get(key)[2], true);
 						
 						String finalSentence = sp.getFinal();
 						
@@ -759,7 +759,7 @@ public class ScreenplayMain {
 						
 						System.out.println("Working on:" + key);
 						DataScraper sp = new DataScraper();
-						sp.doDirectorPower(key, screenPlays.get(key));
+						sp.doDirectorPower(key, screenPlays.get(key), false);
 						String finalSentence = sp.getFinal();
 						
 						if(finalSentence != null) {
@@ -810,7 +810,7 @@ public class ScreenplayMain {
 						if(choice == 3) sp.doStarPower(key, urls.get(key)[2], true);
 						System.out.println("urls.get(key)[1]:" + urls.get(key)[2]);
 						
-						if(choice == 4) sp.doDirectorPower(key, urls.get(key)[2]);
+						if(choice == 4) sp.doDirectorPower(key, urls.get(key)[2],true);
 						
 						String finalSentence = sp.getFinal();
 						
