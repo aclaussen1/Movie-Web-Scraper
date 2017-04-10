@@ -1004,15 +1004,16 @@ public class DataScraper {
 	}
 	
 	public void doGenresFromAllSources(String movieName, String imdbURL, String BoxOfficeMojoURL, String RottenTomatoURL, String TheNumbersURL, String writers) {
+		
+		String imdbGenres = "";
 		try {
 			
 			ImdbScraper s;
-			String imdbGenres;
+			
 			if(imdbURL == null) {
 				s = new ImdbScraper(movieName, writers);
 				if(s.imdbSearch() == false) {
 					System.out.println("In DataScarper, s.imdbSearch() returned false.");
-					return;
 				} else {
 					System.out.println("imdbSearch returned true. Okay. URL visiting: " + s.userAgent.doc.getUrl());
 					imdbGenres = s.getGenres();
@@ -1024,14 +1025,17 @@ public class DataScraper {
 				imdbGenres = s.getGenres();
 				System.out.println("imdb genres:" + imdbGenres);
 			}
-			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String tomatoGenres = "";
+			try{
 			TomatoScraper t;
-			String tomatoGenres;
+			
 			if(RottenTomatoURL == null) {
 				t = new TomatoScraper(movieName, writers);
 				if(t.tomatoSearch() == false) {
 					System.out.println("In DataScarper, tomatoScraper.Search() returned false.");
-					return;
 				} else {
 					System.out.println("tomato returned true. Okay. URL visiting: " + t.userAgent.doc.getUrl());
 					tomatoGenres = t.getGenres();
@@ -1042,14 +1046,18 @@ public class DataScraper {
 				tomatoGenres = t.getGenres();
 				System.out.println("tomato genres:" + tomatoGenres);
 			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
+			String mojoGenres = "";
+			try {
 			MojoScraper m;
-			String mojoGenres;
+			
 			if(BoxOfficeMojoURL == null) {
 				m = new MojoScraper(movieName, writers);
 				if(m.mojoSearch() == false) {
 					System.out.println("In DataScarper, mojoScraper.Search() returned false.");
-					return;
 				} else {
 					System.out.println("mojo returned true. Okay. URL visiting: " + m.userAgent.doc.getUrl());
 					mojoGenres = m.getGenres();
@@ -1061,9 +1069,14 @@ public class DataScraper {
 				mojoGenres = m.getGenres();
 				System.out.println("mojo genres:" + mojoGenres);
 			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
-			NumbersScraper n;
 			String numbersGenres = "";
+			try {
+			NumbersScraper n;
+			
 			if(TheNumbersURL == null) {
 				try {
 					n = new NumbersScraper(movieName, writers);
@@ -1080,15 +1093,16 @@ public class DataScraper {
 				numbersGenres = n.getGenres();
 				System.out.println("numbers genres:" + numbersGenres);
 			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			String subFinalString = movieName + "~" + imdbGenres + "~" + mojoGenres + "~" + tomatoGenres + "~" + numbersGenres;
 			
 			
 			finalString += subFinalString + "\n";
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 	public void doDirectorPower(String movieName, String writers, boolean usingURL) {

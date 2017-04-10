@@ -105,18 +105,18 @@ public class MovielistGenerator {
 
                 urlArray[0] = urls[0];
                 System.out.println("urlArray[0]" + urlArray[0]);
-                urlArray[1] = urls[3];
+                urlArray[1] = urls[2];
                 System.out.println("urlArray[1]" + urlArray[1]);
-                urlArray[2] = urls[4];
+                urlArray[2] = urls[2];
                 System.out.println("urlArray[2]" + urlArray[2]);
-                urlArray[3] = urls[5];
+                urlArray[3] = urls[3];
                 System.out.println("urlArray[3]" + urlArray[3]);
-                urlArray[4] = urls[6];
+                urlArray[4] = urls[4];
                 System.out.println("urlArray[4]" + urlArray[4]);
-                urlArray[5] = urls[1];
+                urlArray[5] = urls[5];
                 System.out.println("urlArray[5]" + urlArray[5]);
-                urlArray[6] = urls[7];
-                System.out.println("urlArray[5]" + urlArray[5]);
+                urlArray[6] = urls[5];
+                System.out.println("urlArray[5]" + urlArray[6]);
                 
                 
                 mainMap.put(urls[0], urlArray);

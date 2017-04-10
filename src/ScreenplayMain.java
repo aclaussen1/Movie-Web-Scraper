@@ -807,8 +807,8 @@ public class ScreenplayMain {
 						if(choice == 2) sp.doNumbersCom(key, urls.get(key)[4], true); //the-numbers.com data with urls
 						
 						//UNCOMMENT THE NEXT LINE TO ENABLE STAR-POWER WITH URLS
-						if(choice == 3) sp.doStarPower(key, urls.get(key)[2], true);
-						System.out.println("urls.get(key)[1]:" + urls.get(key)[2]);
+						if(choice == 3) sp.doStarPower(key, urls.get(key)[1], true);
+						System.out.println("urls.get(key)[1]:" + urls.get(key)[1]);
 						
 						if(choice == 4) sp.doDirectorPower(key, urls.get(key)[2],true);
 						
