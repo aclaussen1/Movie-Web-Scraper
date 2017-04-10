@@ -274,7 +274,7 @@ public class NumbersScraper {
 			//System.out.println(userAgent.doc.innerHTML());
 			for(Element element : userAgent.doc.findEvery("<a>")) {
 				//System.out.println("element.getText():" + element.getText());
-				  if(element.getAt("href").contains("genre")) {
+				  if(element.getAt("href").contains("genre") && !element.getAt("href").contains("record")) {
 					  //System.out.println("here2");
 					  System.out.println("genre:" + element.getText());
 					  return element.getText();
