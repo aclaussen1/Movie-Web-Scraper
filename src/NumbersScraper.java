@@ -35,6 +35,7 @@ public class NumbersScraper {
 	public NumbersScraper(String movieName, String numbersURL, boolean fakeVariable) {
 		nameOfMovie = movieName;
 		  userAgent = new UserAgent();
+		  //System.out.println(x);
 		  try {
 			userAgent.visit(numbersURL);
 		} catch (ResponseException e) {
@@ -268,13 +269,14 @@ public class NumbersScraper {
 	}
 	
 	public String getGenres() {
+		System.out.println("in numbersScraper, nameOfMovie variable:" + nameOfMovie);
 		if(movieFound == false) return "MOVIE NOT FOUND";
 		try {  
 		if(movieFound == true) {
 			//System.out.println(userAgent.doc.innerHTML());
 			for(Element element : userAgent.doc.findEvery("<a>")) {
-				//System.out.println("element.getText():" + element.getText());
-				  if(element.getAt("href").contains("genre") && !element.getAt("href").contains("record")) {
+				//System.out.println("NumbersScraper, inside getGenres():element.getText():" + element.getText());
+				if(element.getAt("href").contains("genre") && !element.getAt("href").contains("record")) {
 					  //System.out.println("here2");
 					  System.out.println("genre:" + element.getText());
 					  return element.getText();

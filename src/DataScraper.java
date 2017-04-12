@@ -850,7 +850,6 @@ public class DataScraper {
 			
 			
 			ArrayList<String> starUrls = imdb.getStarsUrls();
-			System.out.println("here 5000");
 			for (String url : starUrls) {   
 			    System.out.println( "Star URL: " + url);
 			}
@@ -1004,7 +1003,12 @@ public class DataScraper {
 	}
 	
 	public void doGenresFromAllSources(String movieName, String imdbURL, String BoxOfficeMojoURL, String RottenTomatoURL, String TheNumbersURL, String writers) {
-		
+		/*
+		if (!(movieName.contains("Shaolin")  )) {
+			finalString = "";
+			return;
+		}
+		*/
 		String imdbGenres = "";
 		try {
 			
@@ -1102,6 +1106,76 @@ public class DataScraper {
 			
 			finalString += subFinalString + "\n";
 			
+		
+	}
+	
+	public void doStarAward(String movieName, String writers, boolean usingURL) {
+		
+		ImdbScraper s;
+		
+		if (usingURL) {
+			s = new ImdbScraper(movieName, writers, true);
+		} else {
+			s = new ImdbScraper(movieName,writers);
+			if(s.imdbSearch() == false) {
+				System.out.println("Imdb movie not found. Nothing to report for this movie.");
+			} else {
+				System.out.println("imdb returned true. Okay. URL visiting: " + s.userAgent.doc.getUrl());
+			}
+		}
+		
+		ArrayList<String> starUrls = s.getStarsUrls();
+		for (String url : starUrls) {   
+		    System.out.println( "Star URL: " + url);
+		}
+		
+		if(starUrls == null) {
+			return;
+		}
+		
+		UserAgent agent = new UserAgent();
+		
+		for (String url : starUrls) {   
+			try {
+				agent.visit(url);
+				Element outer;
+				try {
+					outer = agent.doc.findFirst("<div class=\"article highlighted\">");
+					for(Element header : outer.findEvery("<span class=\"see-more inline\">")) {
+						System.out.println("here suck my ding");
+						try {
+							//System.out.println("for starUrl: " + url + " looking at potential for link for award page: " + header.findFirst("<a>").getAt("href") );
+							UserAgent temp = new UserAgent();
+							temp.visit(header.findFirst("<a>").getAt("href"));
+						
+						} catch (NotFound e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						/*
+						if(header.findFirst("<h4>").getText().contains("Star:") || header.findFirst("<h4>").getText().contains("Stars:")) {
+							
+							for(Element spans : header.findEvery("<a>")) {
+								if(!spans.innerHTML().contains("span")) return starUrls;
+									System.out.println("here14");
+									starUrls.add(spans.getAt("href"));
+							}
+							return starUrls;
+						
+						*/
+						
+					}
+				} catch (NotFound e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			
+			} catch (ResponseException e) {
+				e.printStackTrace();
+			}
+			
+		}
 		
 	}
 	

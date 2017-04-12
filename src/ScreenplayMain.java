@@ -14,9 +14,9 @@ import javax.swing.JOptionPane;
 
 public class ScreenplayMain {
 	
-	//public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
+	public static String path = "C:\\Users\\aclaussen1\\Downloads\\";
 	//
-	public static String path = "C:\\Users\\Alex\\Downloads\\";
+	//public static String path = "C:\\Users\\Alex\\Downloads\\";
 	//helper methods 
 	public static boolean parseFile(String fileName,String searchStr) throws FileNotFoundException{
         Scanner scan = new Scanner(new File(fileName));
@@ -128,7 +128,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)\n13 = build on existing StarPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n14 = build on existing DirectorPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)\n13 = build on existing StarPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n14 = build on existing DirectorPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n15StarAwardReport");
 		    int choice = Integer.parseInt(name);
 		    
 		    if (choice == 13 || choice == 14) {
@@ -175,6 +175,7 @@ public class ScreenplayMain {
 		    if(choice == 11) titleString = "Movie Title~imdbGenre~MojoGenre~RottenTomatosGenre~TheNumbersGenre";
 		    if(choice == 14) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
 		    if(choice == 13) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
+		    if(choice == 15) titleString = "MOVIE_TITLE~Director_NAME~Award_name~Movie_That_Won_Award~Year~Won~AcademyAward~GoldenGlobe";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -513,7 +514,7 @@ public class ScreenplayMain {
 					    	}
 						
 						DataScraper sp = new DataScraper();
-						sp.doGenresFromAllSources(urls.get(key)[0],urls.get(key)[2],urls.get(key)[3],urls.get(key)[4],urls.get(key)[6],null);
+						sp.doGenresFromAllSources(key,urls.get(key)[2],urls.get(key)[3],urls.get(key)[4],urls.get(key)[5],null);
 						String finalSentence = sp.getFinal();
 						
 						if(finalSentence != null) {
@@ -549,6 +550,11 @@ public class ScreenplayMain {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 						
+						
+						if ( parseFile(path + fileName + "tracker.txt", key) ) {
+							System.out.println(key + " has already been done. Skipping to next movie.");
+				    		continue;
+				    	}
 						
 						
 						DataScraper sp = new DataScraper();
@@ -778,6 +784,52 @@ public class ScreenplayMain {
 					}
 					
 					
+				} else if (choice == 15){ 
+					System.out.println("starting code for starAward report.");
+					for (String key : urls.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						System.out.println("Working on:" + key);
+						
+						DataScraper sp = new DataScraper();
+						sp.doStarAward(key, urls.get(key)[2], true);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+					}
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						
+						if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
+							System.out.println(key + " has already been done. Skipping to next movie.");
+				    		continue;
+				    	}
+						
+						DataScraper sp = new DataScraper();
+						
+						System.out.println("Working on:" + key);
+						
+						
+					}
 				}
 				else if(choice != 7 && choice != 10) {
 					for (String key : urls.keySet()) { //**UNCOMMENT THIS WHEN YOU'RE USING URLS
