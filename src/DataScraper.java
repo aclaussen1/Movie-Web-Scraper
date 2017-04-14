@@ -1113,26 +1113,22 @@ public class DataScraper {
 		
 		ImdbScraper s;
 		
-		String actorName = "";
-		String awardName = "";
-		String winningMovie = "";
-		String year = "";
 		
-		//the following variables take on values of 1 or 0
-		String wonOrNominated = "";
-		String academyAward = "";
-		String globeAward = "";
 		
 		if (usingURL) {
 			s = new ImdbScraper(movieName, writers, true);
+			
 		} else {
 			s = new ImdbScraper(movieName,writers);
 			if(s.imdbSearch() == false) {
 				System.out.println("Imdb movie not found. Nothing to report for this movie.");
+				return;
 			} else {
 				System.out.println("imdb returned true. Okay. URL visiting: " + s.userAgent.doc.getUrl());
 			}
 		}
+		
+		int movieYear = Integer.parseInt(s.getYear());
 		
 		ArrayList<String> starUrls = s.getStarsUrls();
 		for (String url : starUrls) {   
@@ -1146,17 +1142,93 @@ public class DataScraper {
 		UserAgent agent = new UserAgent();
 		
 		for (String url : starUrls) {   
+			
+			String actorName = "";
+			
+			
 			try {
 				agent.visit(url);
+				
+				try {
+					actorName = agent.doc.findFirst("<span class=\"itemprop\" itemprop=\"name\">").getText();
+					System.out.println("actorName: " + actorName);
+				} catch (NotFound e2) {
+					e2.printStackTrace();
+				}
+				
 				Element outer;
 				try {
 					outer = agent.doc.findFirst("<div class=\"article highlighted\">");
 					for(Element header : outer.findEvery("<span class=\"see-more inline\">")) {
-						System.out.println("here suck my ding");
 						try {
 							//System.out.println("for starUrl: " + url + " looking at potential for link for award page: " + header.findFirst("<a>").getAt("href") );
 							UserAgent temp = new UserAgent();
 							temp.visit(header.findFirst("<a>").getAt("href"));
+							Element tableOfAwards = temp.doc.findFirst("<div class=\"article listo\">");
+							for(Element trElement: tableOfAwards.findEvery("<tr>")) {
+								String awardName = "";
+								String winningMovie = "";
+								String yearOfAward = "";
+								String yearOfMovie = "";
+								
+								//the following variables take on values of 1 or 0
+								String nominatedOrWon = "";
+								String academyAward = "";
+								String globeAward = "";
+								try {
+									yearOfAward = trElement.getFirst("<td class=\"award_year\">").getFirst("<a>").getText().trim();
+									System.out.println("yearOfAward :" + yearOfAward);
+								} catch (NotFound e2) {
+									e2.printStackTrace();
+									continue;
+								}
+								
+								//check to see if this movie was made before
+								if (Integer.parseInt(yearOfAward) > movieYear) {
+									continue;
+								}
+								
+								try {
+									nominatedOrWon = trElement.getFirst("<td class=\"award_outcome\">").getFirst("<b>").getText().trim();
+									//this is just the first part of the award name. FOr example Oscars or BAFTA. WE will add the specific award (ex: best actor) later.
+									awardName = trElement.getFirst("<td class=\"award_outcome\">").getFirst("<span>").getText().trim();
+									if (awardName.equalsIgnoreCase("Golden Globe")) {
+										globeAward = "TRUE";
+									} else {
+										globeAward = "FALSE";
+									}
+									
+									if (awardName.equalsIgnoreCase("Oscar")) {
+										academyAward = "TRUE";
+									} else {
+										academyAward = "FALSE";
+									}
+								} catch (NotFound e2) {
+									e2.printStackTrace();
+									continue;
+								}
+								
+								try {
+									awardName += " " + trElement.getFirst("<td class=\"award_description\">").getText().trim();
+									winningMovie = trElement.getFirst("<td class=\"award_description\">").getFirst("<a>").getText().trim();
+									yearOfMovie = trElement.getFirst("<td class=\"award_description\">").getFirst("<span>").getText().substring(1, 5);
+								} catch (NotFound e2) {
+									e2.printStackTrace();
+									continue;
+								}
+								
+								
+								
+								
+								
+								
+								
+								
+								String subFinalString = movieName + "~" + actorName + "~" + awardName + "~" + winningMovie + "~" + yearOfAward + "~" + yearOfMovie + "~" + nominatedOrWon + "~" + academyAward + "~" + globeAward;
+								System.out.println(subFinalString);
+								finalString += subFinalString + "\n";
+								
+							}
 						
 						} catch (NotFound e) {
 							// TODO Auto-generated catch block
@@ -1185,8 +1257,7 @@ public class DataScraper {
 				e.printStackTrace();
 			}
 			
-			String subFinalString = movieName + "~" + actorName + "~" + awardName + "~" + winningMovie + "~" + year + "~" + wonOrNominated + "~" + academyAward + "~" + globeAward;
-			finalString += subFinalString + "\n";
+			
 		}
 		
 	}

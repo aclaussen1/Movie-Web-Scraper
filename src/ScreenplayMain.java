@@ -175,7 +175,7 @@ public class ScreenplayMain {
 		    if(choice == 11) titleString = "Movie Title~imdbGenre~MojoGenre~RottenTomatosGenre~TheNumbersGenre";
 		    if(choice == 14) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
 		    if(choice == 13) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
-		    if(choice == 15) titleString = "MOVIE_TITLE~Director_NAME~Award_name~Movie_That_Won_Award~Year~Won~AcademyAward~GoldenGlobe";
+		    if(choice == 15) titleString = "MOVIE_TITLE~StarName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
