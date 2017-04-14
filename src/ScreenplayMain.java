@@ -711,6 +711,11 @@ public class ScreenplayMain {
 					
 					for (String key : urls.keySet()) {
 						System.out.println("working on movie: "+ key);
+						if (key.equalsIgnoreCase("MOVIE_TITLE")) {
+							continue;
+						}
+						
+						
 						
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
@@ -749,6 +754,7 @@ public class ScreenplayMain {
 						writer2.close();
 
 					}
+					
 					
 					//now deal with non-URLs
 					for(String key : screenPlays.keySet()) {

@@ -89,7 +89,7 @@ public class MovielistGenerator {
             	
             	 //regex solution to why urls aren't working. see http://stackoverflow.com/questions/1757065/java-splitting-a-comma-separated-string-but-ignoring-commas-in-quotes. Don't really understand the regex but it should work
                  String[] tokens = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                 String[] urls = new String[11];
+                 String[] urls = new String[15];
                  int i = 0;
                  for(String t : tokens) {
                 	 System.out.println("t:" + t + " i:" + i);
@@ -101,7 +101,7 @@ public class MovielistGenerator {
                 // use comma as separator
                 //String[] urls = line.split(cvsSplitBy);
                 
-                String[] urlArray = new String[7];
+                String[] urlArray = new String[15];
 
                 urlArray[0] = urls[0];
                 System.out.println("urlArray[0]" + urlArray[0]);
