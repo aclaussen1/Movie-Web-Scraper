@@ -128,7 +128,7 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)\n13 = build on existing StarPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n14 = build on existing DirectorPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n15StarAwardReport");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)\n13 = build on existing StarPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n14 = build on existing DirectorPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n15StarAwardReport\n16DirectorAwardReport");
 		    int choice = Integer.parseInt(name);
 		    
 		    if (choice == 13 || choice == 14) {
@@ -175,7 +175,8 @@ public class ScreenplayMain {
 		    if(choice == 11) titleString = "Movie Title~imdbGenre~MojoGenre~RottenTomatosGenre~TheNumbersGenre";
 		    if(choice == 14) titleString = "MOVIE_TITLE~Year~Director~movie_name~movie_year~gross~budget";
 		    if(choice == 13) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
-		    if(choice == 15) titleString = "MOVIE_TITLE~StarName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
+		    if(choice == 15) titleString = "MOVIE_TITLE~Year~StarName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
+		    if(choice == 16) titleString = "MOVIE_TITLE~Year~DirectorName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -792,6 +793,7 @@ public class ScreenplayMain {
 					
 				} else if (choice == 15){ 
 					System.out.println("starting code for starAward report.");
+					
 					for (String key : urls.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
@@ -821,6 +823,7 @@ public class ScreenplayMain {
 						writer2.close();
 						
 					}
+					
 					for(String key : screenPlays.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
@@ -831,8 +834,91 @@ public class ScreenplayMain {
 				    	}
 						
 						DataScraper sp = new DataScraper();
+						sp.doStarAward(key, screenPlays.get(key), false);
+						String finalSentence = sp.getFinal();
 						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+						
+					}
+				} else if (choice == 16) {
+					System.out.println("starting code for starAward report.");
+					for (String key : urls.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 						System.out.println("Working on:" + key);
+						
+						DataScraper sp = new DataScraper();
+						sp.doDirectorAward(key, urls.get(key)[2], true);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+					}
+					
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						
+						if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
+							System.out.println(key + " has already been done. Skipping to next movie.");
+				    		continue;
+				    	}
+						
+						DataScraper sp = new DataScraper();
+						sp.doDirectorAward(key, screenPlays.get(key), false);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
 						
 						
 					}
