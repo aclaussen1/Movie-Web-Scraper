@@ -858,7 +858,180 @@ public class ScreenplayMain {
 						
 					}
 				} else if (choice == 16) {
-					System.out.println("starting code for starAward report.");
+					System.out.println("starting code for director report.");
+					for (String key : urls.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						System.out.println("Working on:" + key);
+						
+						DataScraper sp = new DataScraper();
+						sp.doDirectorAward(key, urls.get(key)[2], true);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+					}
+					
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						
+						if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
+							System.out.println(key + " has already been done. Skipping to next movie.");
+				    		continue;
+				    	}
+						
+						DataScraper sp = new DataScraper();
+						sp.doDirectorAward(key, screenPlays.get(key), false);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+						
+					}
+				}
+				else if (choice == 17){ 
+					System.out.println("starting code for starAward report (continuing on existing).");
+					
+					for (List rowList : csv) {
+						String[] row = (String[]) rowList.toArray();
+						if (!row[0].equalsIgnoreCase("") ) {
+							if(row[1].equalsIgnoreCase("") || row[0].equalsIgnoreCase("MOVIE_TITLE")) {
+								//this is to address the case where in the directorPower report, the rows with just the movie title get deleted.
+								
+							}
+							else {
+								writer = new BufferedWriter(new FileWriter(logFile, true));
+								writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+								
+								String finalSentence = row[0] + "~" + row[1] + "~" + row[2] + "~" + row[3]+ "~" + row[4]+ "~" + row[5]+ "~" + row[6]+ "~" + row[7]+ "~" + row[8] + "\n";
+								writer.write(finalSentence);
+								writer.close();
+								writer2.write(row[0] + "\n");
+								writer2.close();
+							}
+						}
+					}
+					
+					for (String key : urls.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						System.out.println("Working on:" + key);
+						
+						DataScraper sp = new DataScraper();
+						sp.doStarAward(key, urls.get(key)[2], true);
+						
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+					}
+					
+					for(String key : screenPlays.keySet()) {
+						writer = new BufferedWriter(new FileWriter(logFile, true));
+						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+						
+						if ( parseFile(path + fileName + "tracker.txt", key) || parseFile(path + fileName + "tracker.txt", "\"" + key + "\"") ) {
+							System.out.println(key + " has already been done. Skipping to next movie.");
+				    		continue;
+				    	}
+						
+						DataScraper sp = new DataScraper();
+						sp.doStarAward(key, screenPlays.get(key), false);
+						String finalSentence = sp.getFinal();
+						
+						if(finalSentence != null) {
+							System.out.println(finalSentence);
+							finalSentence = finalSentence.replaceAll("$", "");
+							finalSentence = finalSentence + "\n";
+						}
+						else {
+							System.out.println("here" + key);
+							if(choice < 3) finalSentence = key + "\n";
+							else finalSentence = "\n" + key + "\n";
+						}
+						
+						if(finalSentence.length() > 4 && !finalSentence.equals("\n" + key + "\n") && finalSentence.substring(0, 4).equals("null")) finalSentence = finalSentence.replaceFirst("null", "");
+						
+						writer.write(finalSentence);
+						writer.close();
+						writer2.write(key + "\n");
+						writer2.close();
+						
+						
+					}
+				} 	else if (choice == 18){ 
+					System.out.println("starting code for directorAward report (continuing on existing).");
+					
+					for (List rowList : csv) {
+						String[] row = (String[]) rowList.toArray();
+						if (!row[0].equalsIgnoreCase("") ) {
+							if(row[1].equalsIgnoreCase("") || row[0].equalsIgnoreCase("MOVIE_TITLE")) {
+								//this is to address the case where in the directorPower report, the rows with just the movie title get deleted.
+								
+							}
+							else {
+								writer = new BufferedWriter(new FileWriter(logFile, true));
+								writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
+								
+								String finalSentence = row[0] + "~" + row[1] + "~" + row[2] + "~" + row[3]+ "~" + row[4]+ "~" + row[5]+ "~" + row[6]+ "~" + row[7]+ "~" + row[8] + "\n";
+								writer.write(finalSentence);
+								writer.close();
+								writer2.write(row[0] + "\n");
+								writer2.close();
+							}
+						}
+					}
+					
 					for (String key : urls.keySet()) {
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
