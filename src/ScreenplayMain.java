@@ -128,10 +128,10 @@ public class ScreenplayMain {
 		    
 		    
 		    
-		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)\n13 = build on existing StarPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n14 = build on existing DirectorPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n15StarAwardReport\n16DirectorAwardReport");
+		    String name = JOptionPane.showInputDialog(null, "Please enter the task number:\n1 = Primary Three\n2 = The-Numbers.com\n3 = Star Power\n4 = Director Power\n5 = Movie Year Information\n6 = Movie IMDB Script Information\n7 = Movie+CountryMarch14Report\n8 = DirectorPowerURLS+onlineScripts\n9 = StarPowerURLS+onlineScripts\n10 = MovieCountryReportURLs+onlineScripts\n11 = GenreFromAllSources(must use URLS to work)\n12 = test for numbers(doesn't generate report)\n13 = build on existing StarPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n14 = build on existing DirectorPower csv (you must remove all incomplete movies from csv. The Csv file cannot have movies just by themselves.)\n15StarAwardReport\n16DirectorAwardReport\n17StarAwardContinueOnExisting\n18DirectorPowerContinueOnExisting");
 		    int choice = Integer.parseInt(name);
 		    
-		    if (choice == 13 || choice == 14) {
+		    if (choice == 13 || choice == 14 || choice == 18 || choice ==  17) {
 		    		System.out.println("provide csv file for director power to expand on. Remove all incomplete movies in csv.");
 			        JFileChooser fileChooser = new JFileChooser();
 			        int returnValue = fileChooser.showOpenDialog(new JFrame());
@@ -177,6 +177,8 @@ public class ScreenplayMain {
 		    if(choice == 13) titleString = "MOVIE_TITLE~Year~Actor~movie_name~movie_year~gross~budget~Country~USA";
 		    if(choice == 15) titleString = "MOVIE_TITLE~Year~StarName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
 		    if(choice == 16) titleString = "MOVIE_TITLE~Year~DirectorName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
+		    if(choice == 17) titleString = "MOVIE_TITLE~Year~StarName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
+		    if(choice == 18) titleString = "MOVIE_TITLE~Year~DirectorName~Award_name~Movie_That_Won_Award~YearWonAward~YearMovieMade~WonOrNominated~AcademyAward~GoldenGlobe";
 		    //if this is an existing file, check if there is already the titleSTring. If it is new there shouldn't be. THen add the titleString. OTherwise the existing titleString is kept.
 		    if ( !parseFile(path + fileName + ".txt", titleString) ) {
 		    	writer.write(titleString + "\n");
@@ -504,7 +506,7 @@ public class ScreenplayMain {
 					
 					
 					for (String key : urls.keySet()) {
-						System.out.println("working on: " + key);
+						System.out.println("working on (1st for loop): " + key);
 						//working with urls
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
@@ -547,7 +549,7 @@ public class ScreenplayMain {
 					
 					
 					for(String key : screenPlays.keySet()) {
-						System.out.println("working on: " + key);
+						System.out.println("working on (2nd for loop): " + key);
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 						
@@ -1033,6 +1035,9 @@ public class ScreenplayMain {
 					}
 					
 					for (String key : urls.keySet()) {
+						if (key.equalsIgnoreCase("Abyss, The")) {
+							continue;
+						}
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 						System.out.println("Working on:" + key);
@@ -1063,6 +1068,9 @@ public class ScreenplayMain {
 					}
 					
 					for(String key : screenPlays.keySet()) {
+						if (key.equalsIgnoreCase("Abyss, The")) {
+							continue;
+						} 
 						writer = new BufferedWriter(new FileWriter(logFile, true));
 						writer2 = new BufferedWriter(new FileWriter(complementaryLogFile, true));
 						

@@ -1110,7 +1110,7 @@ public class DataScraper {
 	}
 	
 	public void doStarAward(String movieName, String writers, boolean usingURL) {
-		
+		try {
 		ImdbScraper s;
 		
 		
@@ -1280,7 +1280,9 @@ public class DataScraper {
 			
 			
 		}
-		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 public void doDirectorAward(String movieName, String writers, boolean usingURL) {

@@ -1238,7 +1238,7 @@ public class ImdbScraper {
 				imdbTitle = imdbTitle.substring(0, imdbTitle.indexOf("(") -1);
 			} else imdbTitle = "NOT FOUND";
 			return imdbTitle;
-		} catch(JauntException e) {
+		} catch(Exception e) {
 			
 		}
 		return null;
